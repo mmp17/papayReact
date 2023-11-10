@@ -8,7 +8,7 @@ import "./css/index.css"; // stylesheet
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
+import theme from "./app/MaterialTheme";
 
 const container = document.getElementById("root")!; //  is used to select the HTML element with the ID of root where your React app will mount.
 // where your React app will mount. The ! at the end is a TypeScript non-null assertion operator, indicating that you're sure this element exists.

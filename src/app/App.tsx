@@ -1,6 +1,7 @@
 import React from "react"; // imports the React library, which is necessary to use React components and JSX.
 import "../css/App.css";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { RippleBadge } from "./MaterialTheme/styled";
 
 function App() {
   // React functional component
@@ -11,6 +12,13 @@ function App() {
           <Typography variant="h4" component={"h1"} gutterBottom>
             Create React App on TypeScript with Redux
           </Typography>
+        </Box>
+        <Box>
+          <RippleBadge badgeContent={4}>
+            <Button color="secondary" variant="contained">
+              Contained
+            </Button>
+          </RippleBadge>
         </Box>
       </Stack>
     </Container>
