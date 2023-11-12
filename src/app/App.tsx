@@ -1,7 +1,7 @@
-import React from "react"; // imports the React library, which is necessary to use React components and JSX.
+import React, { useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
 import "../css/App.css";
-import { RippleBadge } from "./MaterialTheme/styled";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "../css/navbar.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { RestaurantPage } from "./screens/RestaurantPage";
 import { CommunityPage } from "./screens/CommunityPage";
@@ -10,15 +10,24 @@ import { MemberPage } from "./screens/MemberPage";
 import { HelpPage } from "./screens/HelpPagePage";
 import { LoginPage } from "./screens/LoginPage";
 import { HomePage } from "./screens/HomePage";
+import { NavbarHome } from "./components/header";
+import { NavbarRestaurant } from "./components/header/restaurant";
+import { NavbarOthers } from "./components/header/others";
 
 function App() {
   // React functional component
+  const [path, setPath] = useState();
+  const main_path = window.location.pathname;
   return (
     <Router>
-      <div>
-        <Router>
-          <div>
-            <nav>
+      {main_path === "/" ? (
+        <NavbarHome setPath={setPath} />
+      ) : main_path.includes("/restaurant") ? (
+        <NavbarRestaurant />
+      ) : (
+        <NavbarOthers />
+      )}
+      {/* <nav>
               <ul>
                 <li>
                   <Link to="/restaurant">RestaurantPage</Link>
@@ -42,34 +51,31 @@ function App() {
                   <Link to="/">Homepage</Link>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
 
-            <Switch>
-              <Route path="/restaurant">
-                <RestaurantPage />
-              </Route>
-              <Route path="/community">
-                <CommunityPage />
-              </Route>
-              <Route path="/orders">
-                <OrdersPage />
-              </Route>
-              <Route path="/member-page">
-                <MemberPage />
-              </Route>
-              <Route path="/help">
-                <HelpPage />
-              </Route>
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <Route path="/">
-                <HomePage />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </div>
+      <Switch>
+        <Route path="/restaurant">
+          <RestaurantPage />
+        </Route>
+        <Route path="/community">
+          <CommunityPage />
+        </Route>
+        <Route path="/orders">
+          <OrdersPage />
+        </Route>
+        <Route path="/member-page">
+          <MemberPage />
+        </Route>
+        <Route path="/help">
+          <HelpPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
     </Router>
   );
 }
