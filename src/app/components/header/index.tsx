@@ -79,10 +79,15 @@ export function NavbarHome(props: any) {
               <img src="/icons/welcome.svg" />
             </Box>
             <Box className="define_restaurant">
-              Set of Authentic Restaurants & Cafes
+              Papay - Revolutionizing Your Dining Experience with Every Delivery
             </Box>
             <Box className="timeline_service">
-              24/7 Services : You order & We deliver!
+              Welcome to Papay, the ultimate online food delivery platform where
+              convenience, variety, and exceptional culinary experiences
+              converge. In today's fast-paced world, Papay understands the value
+              of your time and the importance of a delicious meal, which is why
+              we are dedicated to bringing your favorite dishes from the best
+              local restaurants directly to your doorstep.{" "}
             </Box>
             <Box sx={{ mt: "90px" }}>
               <Button

@@ -54,23 +54,24 @@
 
 .home_navbar .define_restaurant {
   position: relative;
-  width: 484px;
+  width: 700px;
   height: 143px;
   margin-top: 40px;
 
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 50px;
-  line-height: 75px;
+  font-size: 38px;
+  line-height: 50px;
   color: #ffffff;
 }
 
 .home_navbar .timeline_service {
   position: relative;
-  width: 466px;
+  width: 800px;
   height: 28px;
   margin-top: 30px;
+  margin-bottom: 30px;
 
   font-family: "Poppins";
   font-style: normal;
@@ -84,8 +85,8 @@
   position: relative;
   width: 277px;
   height: 277px;
-  margin-top: 41px;
-  margin-left: 494px;
+  margin-top: 100px;
+  margin-left: 100px;
   background: url("/public/home/blister5.png");
   border-radius: 90px 0 0 0;
   filter: invert(46%) blur(1px);

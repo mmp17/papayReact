@@ -1,6 +1,7 @@
 import React, { useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
 import "../css/App.css";
 import "../css/navbar.css";
+import "../css/footer.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { RestaurantPage } from "./screens/RestaurantPage";
@@ -13,6 +14,7 @@ import { HomePage } from "./screens/HomePage";
 import { NavbarHome } from "./components/header";
 import { NavbarRestaurant } from "./components/header/restaurant";
 import { NavbarOthers } from "./components/header/others";
+import { Footer } from "./components/footer";
 
 function App() {
   // React functional component
@@ -27,31 +29,6 @@ function App() {
       ) : (
         <NavbarOthers setPath={setPath} />
       )}
-      {/* <nav>
-              <ul>
-                <li>
-                  <Link to="/restaurant">RestaurantPage</Link>
-                </li>
-                <li>
-                  <Link to="/community">CommunityPage</Link>
-                </li>
-                <li>
-                  <Link to="/orders">OrdersPage</Link>
-                </li>
-                <li>
-                  <Link to="/member-page">MemberPage</Link>
-                </li>
-                <li>
-                  <Link to="/help">HelpPage</Link>
-                </li>
-                <li>
-                  <Link to="/login">LoginPage</Link>
-                </li>
-                <li>
-                  <Link to="/">Homepage</Link>
-                </li>
-              </ul>
-            </nav> */}
 
       <Switch>
         <Route path="/restaurant">
@@ -76,6 +53,8 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
+
+      <Footer />
     </Router>
   );
 }
