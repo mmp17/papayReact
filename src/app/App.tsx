@@ -1,8 +1,9 @@
 import React, { useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../css/App.css";
 import "../css/navbar.css";
 import "../css/footer.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { RestaurantPage } from "./screens/RestaurantPage";
 import { CommunityPage } from "./screens/CommunityPage";
@@ -19,7 +20,9 @@ import { Footer } from "./components/footer";
 function App() {
   // React functional component
   const [path, setPath] = useState();
+  // const location = useLocation();
   const main_path = window.location.pathname;
+
   return (
     <Router>
       {main_path === "/" ? (
