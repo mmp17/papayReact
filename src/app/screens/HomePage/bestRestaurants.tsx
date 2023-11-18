@@ -17,7 +17,7 @@ import { SentimentNeutral } from "@mui/icons-material";
 
 export function BestRestaurants() {
   return (
-    <div className="top_restaurant_frame">
+    <div className="best_restaurant_frame">
       <img
         src={"./icons/line_group.svg"}
         style={{
@@ -26,10 +26,10 @@ export function BestRestaurants() {
           transform: "rotate(90deg)",
         }}
       />
-      <Container>
+      <Container sx={{ paddingTop: "153px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Best Restaurants</Box>
-          <Stack sx={{ mt: "153px" }} flexDirection={"row"}>
+          <Stack sx={{ mt: "43px" }} flexDirection={"row"}>
             <CssVarsProvider>
               <Card
                 variant="outlined"
@@ -381,7 +381,11 @@ export function BestRestaurants() {
             flexDirection={"row"}
             justifyContent={"flex-end"}
             style={{ width: "100%", marginTop: "16px" }}
-          ></Stack>
+          >
+            <Button style={{ background: "#1976D2", color: "#FFFFFF" }}>
+              See All Top Restaurants
+            </Button>
+          </Stack>
         </Stack>
       </Container>
     </div>
