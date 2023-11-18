@@ -7,35 +7,35 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 export function Events() {
   const events_list = [
     {
-      title: "Boyin Foodga marhamat",
-      desc: "Yangicha Uslubda Yangicha Ta'm",
+      title: "Welcome to Boyin Food",
+      desc: "Fresh Flavors, Modern Twist: A Culinary Experience",
       author: "Al-Majid",
       date: "2022/09/12",
-      location: "Toshkent, Yakkasaroy",
+      location: "6A Marghilan Streen, Tashkent",
       img: "/restaurant/boyinfood.jpg",
     },
     {
-      title: "Katta chegirma endi Bellissimoda",
-      desc: "Faqat 25-31-iyun kunlari anqtiq Pizza uchun tashrif buyuring",
+      title: "Big Discounts, Now at Bellissimod",
+      desc: "Authentic Pizza Week: June 25-31, 2023 Exclusive!",
       author: "Bellissimo",
       date: "2022/09/12",
-      location: "Toshkent, Chilonzor",
+      location: "10B Chilanzar 15, Tashkent",
       img: "/restaurant/belissimo.jpg",
     },
     {
-      title: "Hali his qilmagan tamni his qilmoqchimisiz?",
-      desc: "Merhaba promokodi orqali 50% chegirmaga ega bo'ling",
+      title: "A Unique Taste Adventure Awaits!",
+      desc: "Get 50% off with promo code Merhaba",
       author: "Chicken House",
       date: "2022/09/12",
-      location: "Toshkent, Uchtepa",
+      location: "10C Yunusabad 19, Tashkent",
       img: "/restaurant/merhaba.jpg",
     },
     {
-      title: "Yangicha yondashuv endi O'zbekistonda",
-      desc: "O'zbekistondagi eng yirik ulgurji bozor",
+      title: "A new approach is now in Uzbekistan",
+      desc: "The largest wholesale market in Uzbekistan",
       author: "Food city",
       date: "2022/09/12",
-      location: "Toshkent, Chilonzor",
+      location: "10C Center 19, Tashkent",
       img: "/restaurant/food_city.jpg",
     },
   ];
@@ -45,7 +45,7 @@ export function Events() {
       <Container sx={{ overflow: "hidden" }}>
         <Stack className={"events_main"}>
           <Box className={"events_text"}>
-            <span className={"category_title"}>Hodisalar</span>
+            <span className={"category_title"}>Events</span>
           </Box>
           <Box className={"prev_next_frame"}>
             <img
