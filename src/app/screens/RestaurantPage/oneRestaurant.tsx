@@ -12,7 +12,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import StarIcon from "@mui/icons-material/Star";
 
-const restaurant_list = Array.from(Array(10).keys());
+const restaurant_list = Array.from(Array(20).keys());
 const product_list = Array.from(Array(8).keys());
 
 export function OneRestaurant() {
@@ -58,8 +58,8 @@ export function OneRestaurant() {
               centeredSlides={false}
               spaceBetween={30}
               navigation={{
-                nextEl: ".restaurant_next",
-                prevEl: ".restaurant_prev",
+                nextEl: ".restaurant-next",
+                prevEl: ".restaurant-prev",
               }}
             >
               {restaurant_list.map((ele, index) => {
