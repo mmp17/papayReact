@@ -26,26 +26,27 @@ export function ChosenDish() {
             modules={[FreeMode, Navigation, Thumbs]}
             className="dish_swiper"
           >
-            return (
             <SwiperSlide>
               <img
                 style={{ width: "100%", height: "100%" }}
                 src={`/others/tortilla01.jpeg`}
+                alt="Dish 1"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
                 style={{ width: "100%", height: "100%" }}
                 src={`/others/tortilla02.jpeg`}
+                alt="Dish 2"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
                 style={{ width: "100%", height: "100%" }}
                 src={`/others/tortilla03.jpeg`}
+                alt="Dish 3"
               />
             </SwiperSlide>
-            );
           </Swiper>
           <Swiper
             // onSwiper={setThumbsSwiper}

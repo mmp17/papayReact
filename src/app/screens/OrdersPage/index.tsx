@@ -71,7 +71,7 @@ export function OrdersPage() {
               <div className={"order_user_img"}>
                 <img
                   className={"order_user_avatar"}
-                  src={"/icons/profile.svg"}
+                  src={"/icons/ergashKarimov.jpeg"}
                 />
                 <div className={"order_user_icon_box"}>
                   <img src="/icons/user_icon.svg" />
