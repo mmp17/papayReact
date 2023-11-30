@@ -4,21 +4,26 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
-import { MemberPosts } from "./memberPosts";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { MemberFollowers } from "./memberFollowers";
 import { MemberFollowing } from "./memberFollowing";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { MemberPosts } from "./memberPosts";
 import { MySettings } from "./mySettings";
+import SettingsIcon from "@mui/icons-material/Settings";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const userInfo = [1, 2, 3, 4, 5];
 
 export function VisitMyPage(props: any) {
   /**INITIALIZATION */
   const [value, setValue] = useState("1");
+  // alert(value);
 
   /**HANDLERS */
   const handleChange = (event: any, newValue: string) => {
@@ -65,7 +70,7 @@ export function VisitMyPage(props: any) {
                 <TabPanel value="2">
                   <Box className={"menu_name"}>Followers</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowers />
+                    <MemberFollowers actions_enabled={true} />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"
@@ -91,10 +96,11 @@ export function VisitMyPage(props: any) {
                     </Stack>
                   </Box>
                 </TabPanel>
+
                 <TabPanel value="3">
                   <Box className={"menu_name"}>Following</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowing userInfo={userInfo} />
+                    <MemberFollowing actions_enabled={true} />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"
@@ -119,6 +125,16 @@ export function VisitMyPage(props: any) {
                       </Box>
                     </Stack>
                   </Box>
+                </TabPanel>
+
+                <TabPanel value={"4"}>
+                  <Box className={"menu_name"}>Write article</Box>
+                  <Box className={"write_content"}></Box>
+                </TabPanel>
+
+                <TabPanel value={"5"}>
+                  <Box className={"menu_name"}>Chosen article</Box>
+                  <Box className={"menu_content"}></Box>
                 </TabPanel>
 
                 <TabPanel value="6">
@@ -156,10 +172,10 @@ export function VisitMyPage(props: any) {
                   <span className={"order_user_prof"}>User</span>
                 </Box>
                 <div className={"user_media_box"}>
-                  <img src="/icons/facebook.svg" />
-                  <img src="/icons/instagram.svg" />
-                  <img src="/icons/telegram.svg" />
-                  <img src="/icons/youtube.svg" />
+                  <FacebookIcon />
+                  <InstagramIcon />
+                  <TelegramIcon />
+                  <YouTubeIcon />
                 </div>
                 <Box className={"user_media_box"}>
                   <p className="follows">Followers: 0</p>
@@ -178,7 +194,7 @@ export function VisitMyPage(props: any) {
                     <Tab
                       style={{ flexDirection: "column" }}
                       value={"4"}
-                      component={(e) => (
+                      component={() => (
                         <Button
                           variant="contained"
                           onClick={() => setValue("4")}
@@ -201,7 +217,7 @@ export function VisitMyPage(props: any) {
                 >
                   <Tab
                     value={"1"}
-                    component={(e) => (
+                    component={() => (
                       <div
                         className={`menu_box ${value}`}
                         onClick={() => setValue("1")}
@@ -215,7 +231,7 @@ export function VisitMyPage(props: any) {
                   <Tab
                     style={{ flexDirection: "column" }}
                     value={"1"}
-                    component={(e) => (
+                    component={() => (
                       <div
                         className={`menu_box ${value}`}
                         onClick={() => setValue("2")}
@@ -229,7 +245,7 @@ export function VisitMyPage(props: any) {
                   <Tab
                     style={{ flexDirection: "column" }}
                     value={"1"}
-                    component={(e) => (
+                    component={() => (
                       <div
                         className={`menu_box ${value}`}
                         onClick={() => setValue("3")}

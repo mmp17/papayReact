@@ -61,7 +61,7 @@ export function VisitOtherPage() {
                 <TabPanel value="2">
                   <Box className={"menu_name"}>Followers</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowers />
+                    <MemberFollowers actions_enabled={false} />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"
@@ -90,7 +90,7 @@ export function VisitOtherPage() {
                 <TabPanel value="3">
                   <Box className={"menu_name"}>Following</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowing />
+                    <MemberFollowing actions_enabled={false} />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"

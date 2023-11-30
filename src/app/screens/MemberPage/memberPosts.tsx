@@ -13,18 +13,18 @@ export function MemberPosts(props: any) {
       >
         <img
           className={"all_article_img"}
-          src="/auth/profile.svg"
+          src="/auth/default_article.svg"
           width={"35px"}
           style={{ borderRadius: "50%", backgroundSize: "cover" }}
         />
         <Box className={"all_article_container"}>
           <Box alignItems={"center"} display={"flex"}>
             <img
-              src="/auth/profile.svg"
+              src="/auth/default_user.png"
               width={"35px"}
               style={{ borderRadius: "50%", backgroundSize: "cover" }}
             />
-            <span className={"all_article_author_user"}>Joseph</span>
+            <span className={"all_article_author_user"}>Umar</span>
           </Box>
           <Box
             style={{
@@ -35,7 +35,7 @@ export function MemberPosts(props: any) {
           >
             <span className={"all_article_title"}>Celebrity</span>
             <span className={"all_article_desc"}>
-              zo'r top musiqa boshlandi
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
             </span>
           </Box>
           <Box>
