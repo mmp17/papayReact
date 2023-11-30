@@ -11,6 +11,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { MemberFollowers } from "./memberFollowers";
 import { MemberFollowing } from "./memberFollowing";
+import { TViewer } from "../../components/tuiEditor/TViewer";
 
 export function VisitOtherPage() {
   /**INITIALIZATION */
@@ -87,6 +88,7 @@ export function VisitOtherPage() {
                     </Stack>
                   </Box>
                 </TabPanel>
+
                 <TabPanel value="3">
                   <Box className={"menu_name"}>Following</Box>
                   <Box className={"menu_content"}>
@@ -116,6 +118,13 @@ export function VisitOtherPage() {
                     </Stack>
                   </Box>
                 </TabPanel>
+
+                <TabPanel value={"4"}>
+                  <Box className={"menu_name"}>Chosen Article</Box>
+                  <Box className={"menu_content"}>
+                    <TViewer text={`<h3>Hello</h3>`} />
+                  </Box>
+                </TabPanel>
               </Box>
             </Stack>
 
@@ -138,7 +147,7 @@ export function VisitOtherPage() {
                       <img src="/icons/user_icon.svg" />
                     </div>
                   </div>
-                  <span className={"order_user_name"}>Joseph</span>
+                  <span className={"order_user_name"}>John</span>
                   <span className={"order_user_prof"}>User</span>
                 </Box>
                 <div className={"user_media_box"}>
@@ -148,10 +157,10 @@ export function VisitOtherPage() {
                   <img src="/icons/youtube.svg" />
                 </div>
                 <Box className={"user_media_box"}>
-                  <p className="follows">Followers: 0</p>
-                  <p className="follows">Following: 0</p>
+                  <p className="follows">Followers: 3</p>
+                  <p className="follows">Following: 3</p>
                 </Box>
-                <p>Qo'shimcha kiritilma</p>
+                <p>Some bio information about the user</p>
                 <Box
                   display={"flex"}
                   justifyContent={"flex-end"}
@@ -169,7 +178,7 @@ export function VisitOtherPage() {
                           variant="contained"
                           onClick={() => setValue("4")}
                         >
-                          Writing Article
+                          Follow the user
                         </Button>
                       )}
                     />
@@ -190,7 +199,7 @@ export function VisitOtherPage() {
                         onClick={() => setValue("1")}
                       >
                         <img src="/icons/pencil.svg" />
-                        <span>Maqolalarim</span>
+                        <span>Articles</span>
                       </div>
                     )}
                   />

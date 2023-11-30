@@ -17,6 +17,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
+import { TViewer } from "../../components/tuiEditor/TViewer";
 
 const userInfo = [1, 2, 3, 4, 5];
 
@@ -129,12 +131,16 @@ export function VisitMyPage(props: any) {
 
                 <TabPanel value={"4"}>
                   <Box className={"menu_name"}>Write article</Box>
-                  <Box className={"write_content"}></Box>
+                  <Box className={"write_content"}>
+                    <TuiEditor />
+                  </Box>
                 </TabPanel>
 
                 <TabPanel value={"5"}>
                   <Box className={"menu_name"}>Chosen article</Box>
-                  <Box className={"menu_content"}></Box>
+                  <Box className={"menu_content"}>
+                    <TViewer text={`<h3>Hello World</h3>`} />
+                  </Box>
                 </TabPanel>
 
                 <TabPanel value="6">
