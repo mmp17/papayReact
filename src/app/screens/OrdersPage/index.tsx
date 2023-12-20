@@ -38,13 +38,13 @@ export function OrdersPage() {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Tab
-                    label="Buyurtmalarim"
+                    label="Muy Orders"
                     value="1"
                     style={{ color: "#1976d2" }}
                   />
-                  <Tab label="Jarayon" value="2" style={{ color: "#1976d2" }} />
+                  <Tab label="Process" value="2" style={{ color: "#1976d2" }} />
                   <Tab
-                    label="Yakunlangan"
+                    label="Finished"
                     value="3"
                     style={{ color: "#1976d2" }}
                   />

@@ -66,7 +66,7 @@ export function HelpPage() {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab label="Qoidalar" value={"1"} />
+                <Tab label="Rules" value={"1"} />
                 <Tab label="FAQ" value={"2"} />
                 <Tab label="Message to Admin" value={"3"} />
               </TabList>
@@ -127,7 +127,7 @@ export function HelpPage() {
                         <input
                           type="text"
                           name="mb_email"
-                          placeholder="Elektron Manzil"
+                          placeholder="E-mail Address"
                         />
                       </div>
                       <div className="admin_input_box">

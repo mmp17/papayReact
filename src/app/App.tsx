@@ -16,6 +16,7 @@ import { NavbarHome } from "./components/header";
 import { NavbarRestaurant } from "./components/header/restaurant";
 import { NavbarOthers } from "./components/header/others";
 import { Footer } from "./components/footer";
+import Car from "./screens/RestaurantPage/testCar";
 
 function App() {
   // React functional component
@@ -53,7 +54,8 @@ function App() {
           <LoginPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          {/* <HomePage /> */}
+          <Car />
         </Route>
       </Switch>
 

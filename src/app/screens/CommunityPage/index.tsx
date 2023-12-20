@@ -48,22 +48,22 @@ export function CommunityPage(props: any) {
                       style={{ borderColor: "blue" }}
                     >
                       <Tab
-                        label="Barcha Maqolalar"
+                        label="All Articles"
                         value="1"
                         style={{ color: "#1976d2" }}
                       />
                       <Tab
-                        label="Mashhurlar"
+                        label="Celebrities"
                         value="2"
                         style={{ color: "#1976d2" }}
                       />
                       <Tab
-                        label="Oshxonaga baho"
+                        label="Restaurant Evaluations"
                         value="3"
                         style={{ color: "#1976d2" }}
                       />
                       <Tab
-                        label="Hikoyalar"
+                        label="Stories"
                         value="4"
                         style={{ color: "#1976d2" }}
                       />
