@@ -1,9 +1,16 @@
 import { Badge, Box, Button, Icon, IconButton, Stack } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export function NavbarHome(props: any) {
+  // Initialization
+  const [name, setName] = useState("Papay");
+  // Handlers
+  const changeName = () => {
+    setName("Papays!");
+  };
+
   return (
     <div className="format home_navbar">
       <Container>
@@ -79,7 +86,8 @@ export function NavbarHome(props: any) {
               <img src="/icons/welcome.svg" />
             </Box>
             <Box className="define_restaurant">
-              Papay - Revolutionizing Your Dining Experience with Every Delivery
+              {name} - Revolutionizing Your Dining Experience with Every
+              Delivery
             </Box>
             <Box className="timeline_service">
               Welcome to Papay, the ultimate online food delivery platform where
@@ -98,6 +106,7 @@ export function NavbarHome(props: any) {
                   background: "#1976D2",
                   color: "#FFFFFF",
                 }}
+                onClick={changeName}
               >
                 REGISTRATION
               </Button>
