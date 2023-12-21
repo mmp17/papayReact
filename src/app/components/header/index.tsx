@@ -1,15 +1,16 @@
 import { Badge, Box, Button, Icon, IconButton, Stack } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export function NavbarHome(props: any) {
   // Initialization
-  const [name, setName] = useState("Papay");
+  const [count, setCount] = useState(1); //componentDidMount
+  const [value, setValue] = useState(true); // componentWillUnmount
   // Handlers
-  const changeName = () => {
-    setName("Papays!");
-  };
+  useEffect(() => {
+    setCount(count + 1);
+  }, [value]); // component DidUpdate
 
   return (
     <div className="format home_navbar">
@@ -86,7 +87,7 @@ export function NavbarHome(props: any) {
               <img src="/icons/welcome.svg" />
             </Box>
             <Box className="define_restaurant">
-              {name} - Revolutionizing Your Dining Experience with Every
+              Papays {count} - Revolutionizing Your Dining Experience with Every
               Delivery
             </Box>
             <Box className="timeline_service">
@@ -106,7 +107,7 @@ export function NavbarHome(props: any) {
                   background: "#1976D2",
                   color: "#FFFFFF",
                 }}
-                onClick={changeName}
+                onClick={() => setValue(!value)}
               >
                 REGISTRATION
               </Button>
