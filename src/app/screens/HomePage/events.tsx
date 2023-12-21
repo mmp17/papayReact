@@ -74,9 +74,9 @@ export function Events() {
             }}
             autoplay={{ delay: 2000, disableOnInteraction: true }}
           >
-            {events_list.map((value, number) => {
+            {events_list.map((value, key) => {
               return (
-                <SwiperSlide className={"events_info_frame"}>
+                <SwiperSlide className={"events_info_frame"} key={key}>
                   <div className="events_img">
                     <img src={value.img} className={"events_img"} />
                   </div>

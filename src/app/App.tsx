@@ -9,7 +9,7 @@ import { RestaurantPage } from "./screens/RestaurantPage";
 import { CommunityPage } from "./screens/CommunityPage";
 import { OrdersPage } from "./screens/OrdersPage";
 import { MemberPage } from "./screens/MemberPage";
-import { HelpPage } from "./screens/HelpPagePage";
+import { HelpPage } from "./screens/HelpPage";
 import { LoginPage } from "./screens/LoginPage";
 import { HomePage } from "./screens/HomePage";
 import { NavbarHome } from "./components/header";
@@ -54,8 +54,8 @@ function App() {
           <LoginPage />
         </Route>
         <Route path="/">
-          {/* <HomePage /> */}
-          <Car />
+          <HomePage />
+          {/* <Car /> */}
         </Route>
       </Switch>
 

@@ -77,8 +77,8 @@ export function HelpPage() {
               <TabPanel value={"1"}>
                 <Stack className="theRules_box">
                   <Box className={"theRulesFrame"}>
-                    {rules.map((ele, number) => {
-                      return <p>{ele}</p>;
+                    {rules.map((ele, key) => {
+                      return <p key={key}>{ele}</p>;
                     })}
                   </Box>
                 </Stack>
