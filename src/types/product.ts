@@ -1,9 +1,11 @@
+// Represents a structure for a "like" action performed by a user.
 export interface MeLiked {
   mb_id: string;
   like_ref_id: string;
   my_favorite: boolean;
 }
 
+// Represents a detailed structure for a product in the application.
 export interface Product {
   _id: string;
   product_name: string;
