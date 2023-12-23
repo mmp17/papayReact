@@ -4,6 +4,7 @@ import assert from "assert"; // Used for assertions within the function.
 import { serverApi } from "../../lib/config"; // a base URL for API service endpoints
 import { Definer } from "../../lib/Definer"; // utility for error definitions
 import { Restaurant } from "../../types/user"; // TypeScript type or interface defining the structure of a restaurant object.
+import { SearchObj } from "../../types/others";
 
 // Class Definition:
 class RestaurantApiServer {
@@ -33,6 +34,21 @@ class RestaurantApiServer {
       // Catches any errors that occur during the API call and logs them.
       console.log(`ERROR::: getTopRestaurants ${err.message}`);
       throw err; // Rethrows the error for further handling by the caller.
+    }
+  }
+
+  async getRestaurants(data: SearchObj) {
+    try {
+      const url = `/restaurants?order=${data.order}&page=${data.page}&limit=${data.limit}`,
+        result = await axios.get(this.path + url, { withCredentials: true });
+      assert.ok(result, Definer.general_err1);
+
+      console.log("result:::", result.data.state);
+      const restaurants: Restaurant[] = result.data.data;
+      return restaurants;
+    } catch (err: any) {
+      console.log(`ERROR::: getRestaurants ${err.message}`);
+      throw err;
     }
   }
 }

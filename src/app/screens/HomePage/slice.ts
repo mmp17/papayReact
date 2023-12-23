@@ -21,19 +21,19 @@ const HomePageSlice = createSlice({
       state.topRestaurants = action.payload;
       // Each reducer takes the current state and an action, and updates the state based on the action's payload.
     },
-    bestRestaurants: (state, action) => {
+    setBestRestaurants: (state, action) => {
       state.bestRestaurants = action.payload;
     },
-    trendProducts: (state, action) => {
+    setTrendProducts: (state, action) => {
       state.trendProducts = action.payload;
     },
-    bestBoArticles: (state, action) => {
+    setBestBoArticles: (state, action) => {
       state.bestBoArticles = action.payload;
     },
-    trendBoArticles: (state, action) => {
+    setTrendBoArticles: (state, action) => {
       state.trendBoArticles = action.payload;
     },
-    newsBoArticles: (state, action) => {
+    setNewsBoArticles: (state, action) => {
       state.newsBoArticles = action.payload;
     },
   },
@@ -43,11 +43,11 @@ const HomePageSlice = createSlice({
 //These actions can be dispatched to update the state in the store.
 export const {
   setTopRestaurants,
-  bestRestaurants,
-  trendProducts,
-  bestBoArticles,
-  trendBoArticles,
-  newsBoArticles,
+  setBestRestaurants,
+  setTrendProducts,
+  setBestBoArticles,
+  setTrendBoArticles,
+  setNewsBoArticles,
 } = HomePageSlice.actions;
 
 //connection to store i.e this reducer will be used in the Redux store.

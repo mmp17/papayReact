@@ -5,6 +5,7 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import CallIcon from "@mui/icons-material/Call";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { CardOverflow, IconButton } from "@mui/joy";
 import { Favorite } from "@mui/icons-material";
@@ -36,7 +37,7 @@ export function TopRestaurants() {
           alignItems={"center"}
           sx={{ mt: "45px" }}
         >
-          <Box className="category_title">TOP Restauranlar</Box>
+          <Box className="category_title">TOP Restaurants</Box>
           <Stack sx={{ mt: "43px" }} flexDirection={"row"} m={"16px"}>
             {topRestaurants.map((ele: Restaurant) => {
               const image_path = `${serverApi}/${ele.mb_image}`;
@@ -72,7 +73,13 @@ export function TopRestaurants() {
                         startDecorator={<LocationOnRoundedIcon />}
                         textColor="neutral.300"
                       >
-                        {ele.mb_address}
+                        Tashkent, Yunusabad 444
+                      </Typography>
+                      <Typography
+                        startDecorator={<CallIcon />}
+                        textColor="neutral.300"
+                      >
+                        {ele.mb_phone}
                       </Typography>
                     </CardContent>
                     <CardOverflow
