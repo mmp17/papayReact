@@ -5,8 +5,10 @@ import reduxLogger from "redux-logger";
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(reduxLogger),
+  // A middleware for logging actions and state changes in the Redux store.
   reducer: {
     homePage: HomePageReducer,
+    //  A slice reducer for the home page, imported from a specific path.
   },
 });
 

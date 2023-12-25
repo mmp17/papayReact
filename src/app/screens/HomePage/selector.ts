@@ -1,7 +1,6 @@
 // data reader, i.e The provided code is a collection of selector functions
 // for a Redux store, using the reselect library.
 import { createSelector } from "reselect";
-import { HomePage } from ".";
 import { AppRootState } from "../../../types/screen";
 
 // Base Selector i.e A basic selector that takes the entire application state

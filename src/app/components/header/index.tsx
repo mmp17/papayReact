@@ -87,7 +87,7 @@ export function NavbarHome(props: any) {
               <img src="/icons/welcome.svg" />
             </Box>
             <Box className="define_restaurant">
-              Papays {count} - Revolutionizing Your Dining Experience with Every
+              Papays - Revolutionizing Your Dining Experience with Every
               Delivery
             </Box>
             <Box className="timeline_service">

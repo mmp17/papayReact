@@ -107,7 +107,14 @@ export function TopRestaurants() {
                           color: "rgba(0, 0, 0,.4)",
                         }}
                       >
-                        <Favorite style={{ fill: "white" }} />
+                        <Favorite
+                          style={{
+                            fill:
+                              ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                                ? "red"
+                                : "white",
+                          }}
+                        />
                       </IconButton>
                       <Typography
                         level="body-sm"
