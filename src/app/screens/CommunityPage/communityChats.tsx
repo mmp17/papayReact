@@ -3,7 +3,7 @@ import { Avatar, Box, Stack } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
 export function CommunityChats() {
-  /** INITIALIZATIONS **/
+  /** Initializations **/
   const [messagesList, setMessagesList] = useState([]);
 
   return (

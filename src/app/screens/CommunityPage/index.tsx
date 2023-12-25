@@ -15,7 +15,7 @@ import "../../../css/community.css";
 const targetBoArticles = [1, 2, 3, 4, 5];
 
 export function CommunityPage(props: any) {
-  /** INITIALIZATIONS **/
+  /** Initializations **/
   const [value, setValue] = React.useState("1");
 
   /** HANDLERS **/

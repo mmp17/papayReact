@@ -14,7 +14,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export function HelpPage() {
-  // INITIALIZATIONS
+  // Initializations
   const [value, setValue] = React.useState("1");
   const faq = [
     {

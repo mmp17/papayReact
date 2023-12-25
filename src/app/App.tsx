@@ -18,21 +18,34 @@ import { NavbarOthers } from "./components/header/others";
 import { Footer } from "./components/footer";
 import Car from "./screens/RestaurantPage/testCar";
 import AuthenticationModal from "./components/auth";
+import { SettingsSharp } from "@mui/icons-material";
 
 function App() {
+  //** Initializations */
   // React functional component
   const [path, setPath] = useState();
   // const location = useLocation();
   const main_path = window.location.pathname;
+  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
+  /**  Handlers */
+  const handleSignupOpen = () => setSignUpOpen(true);
+  const handleSignupClose = () => setSignUpOpen(false);
+  const handleLoginOpen = () => setLoginOpen(true);
+  const handleLoginClose = () => setLoginOpen(false);
   return (
     <Router>
       {main_path === "/" ? (
-        <NavbarHome setPath={setPath} />
+        <NavbarHome
+          setPath={setPath}
+          handleLoginOpen={handleLoginOpen}
+          handleSignupOpen={handleSignupOpen}
+        />
       ) : main_path.includes("/restaurant") ? (
-        <NavbarRestaurant setPath={setPath} />
+        <NavbarRestaurant setPath={setPath} handleLoginOpen={handleLoginOpen} />
       ) : (
-        <NavbarOthers setPath={setPath} />
+        <NavbarOthers setPath={setPath} handleLoginOpen={handleLoginOpen} />
       )}
 
       <Switch>
@@ -60,7 +73,14 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-      <AuthenticationModal />
+      <AuthenticationModal
+        loginOpen={loginOpen}
+        handleLoginOpen={handleLoginOpen}
+        handleLoginClose={handleLoginClose}
+        signUpOpen={signUpOpen}
+        handleSignupOpen={handleSignupOpen}
+        handleSignupClose={handleSignupClose}
+      />
     </Router>
   );
 }

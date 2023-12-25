@@ -23,7 +23,7 @@ import { TViewer } from "../../components/tuiEditor/TViewer";
 const userInfo = [1, 2, 3, 4, 5];
 
 export function VisitMyPage(props: any) {
-  /**INITIALIZATION */
+  /**Initializations */
   const [value, setValue] = useState("1");
   // alert(value);
 

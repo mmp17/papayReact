@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export function NavbarHome(props: any) {
-  // Initialization
+  // Initializations
   const [count, setCount] = useState(1); //componentDidMount
   const [value, setValue] = useState(true); // componentWillUnmount
   // Handlers
@@ -71,6 +71,7 @@ export function NavbarHome(props: any) {
               <Button
                 variant="contained"
                 style={{ color: "#FFFFFF", background: "#1976D2" }}
+                onClick={props.handleLoginOpen}
               >
                 LOGIN
               </Button>
@@ -107,7 +108,7 @@ export function NavbarHome(props: any) {
                   background: "#1976D2",
                   color: "#FFFFFF",
                 }}
-                onClick={() => setValue(!value)}
+                onClick={props.handleSignupOpen}
               >
                 REGISTRATION
               </Button>

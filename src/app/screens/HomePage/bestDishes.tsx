@@ -31,7 +31,7 @@ const trendProductsRetriever = createSelector(
 );
 
 export function BestDishes() {
-  // Initialization
+  // Initializations
   const { setTrendProducts } = actionDispatch(useDispatch());
   const { trendProducts } = useSelector(trendProductsRetriever);
   // The useEffect hook is used to fetch data when the component mounts

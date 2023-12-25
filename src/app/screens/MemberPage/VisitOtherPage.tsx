@@ -14,7 +14,7 @@ import { MemberFollowing } from "./memberFollowing";
 import { TViewer } from "../../components/tuiEditor/TViewer";
 
 export function VisitOtherPage() {
-  /**INITIALIZATION */
+  /**Initializations */
   const [value, setValue] = useState("1");
 
   /**HANDLERS */
