@@ -14,3 +14,9 @@ export interface ProductSearchObj {
   restaurant_mb_id?: string; // is used when the product search is filtered by a specific restaurant
   product_collection?: string; // allows filtering the search within a particular product collection.
 }
+
+export interface MemberLiken {
+  like_group: string;
+  like_status: number;
+  like_ref_id: string;
+}

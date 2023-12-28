@@ -22,12 +22,13 @@ import AuthenticationModal from "./components/auth";
 import { Member } from "../types/user";
 import { serverApi } from "../lib/config";
 import {
+  sweetErrorHandling,
   sweetFailureProvider,
   sweetTopSmallSuccessAlert,
 } from "../lib/sweetAlert";
 import { Definer } from "../lib/Definer";
 import MemberApiService from "./apiServer/memberApiServer";
-// import "../app/apiServer/verify";
+import "../app/apiServer/verify";
 
 function App() {
   //** Initializations */
