@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { MonetizationOn } from "@mui/icons-material";
 import { Box, Container, Stack } from "@mui/material";
-//REDUX
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 // Redux's useDispatch and useSelector hooks are used
 // for dispatching actions and accessing the Redux state.
@@ -20,7 +20,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setTrendProducts: (data: Product[]) => dispatch(setTrendProducts(data)),
 });
 
-//** REDUX SELECTOR */
+//** Redux Selector */
 // selector created using createSelector from reselect
 // to efficiently retrieve trending products from the Redux state.
 const trendProductsRetriever = createSelector(

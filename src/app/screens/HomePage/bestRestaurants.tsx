@@ -14,12 +14,6 @@ import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import CallIcon from "@mui/icons-material/Call";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { SentimentNeutral } from "@mui/icons-material";
-
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { retrieveBestRestaurants } from "../../screens/HomePage/selector";
-import { Restaurant } from "../../../types/user";
-import { serverApi } from "../../../lib/config";
 import assert from "assert";
 import MemberApiService from "../../apiServer/memberApiServer";
 import { Definer } from "../../../lib/Definer";
@@ -29,7 +23,14 @@ import {
 } from "../../../lib/sweetAlert";
 import { useHistory } from "react-router-dom";
 
-//** REDUX SELECTOR */
+//Redux
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveBestRestaurants } from "../../screens/HomePage/selector";
+import { Restaurant } from "../../../types/user";
+import { serverApi } from "../../../lib/config";
+
+//** Redux Selector */
 const bestRestaurantsRetriever = createSelector(
   retrieveBestRestaurants,
   (bestRestaurants) => ({
@@ -44,7 +45,6 @@ export function BestRestaurants() {
   const refs: any = useRef([]);
 
   /** Handlers */
-
   const chosenRestaurantHandler = (id: string) => {
     history.push(`/restaurant/${id}`);
   };

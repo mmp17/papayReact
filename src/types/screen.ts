@@ -6,6 +6,7 @@ import { Restaurant } from "./user";
 // AppRootState Interface
 export interface AppRootState {
   homePage: HomePageState; // It contains property homePage, typed as HomePageState.
+  restaurantPage: RestaurantPageState;
 }
 // is an interface representing the overall shape of application's state.
 
@@ -18,6 +19,15 @@ export interface HomePageState {
   bestBoArticles: BoArticle[];
   trendBoArticles: BoArticle[];
   newsBoArticles: BoArticle[];
+}
+
+// RestaurantPageState Interface
+export interface RestaurantPageState {
+  targetRestaurants: Restaurant[];
+  randomRestaurants: Restaurant[];
+  chosenRestaurant: Restaurant | null;
+  targetProducts: Product[];
+  chosenProduct: Product | null;
 }
 
 // TypeScript interfaces that are used to define the shape of the state

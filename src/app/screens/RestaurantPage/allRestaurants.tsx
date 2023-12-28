@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -24,9 +24,39 @@ import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { setTargetRestaurants } from "../../screens/RestaurantPage/slice";
+import { retrieveTargetRestaurants } from "../..//screens/RestaurantPage/selector";
+import { Restaurant } from "../../../types/user";
+import { Dispatch } from "@reduxjs/toolkit";
+
 const order_list = Array.from(Array(8).keys());
 
+//** Redux Slice */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setTargetRestaurants: (data: Restaurant[]) =>
+    dispatch(setTargetRestaurants(data)),
+});
+
+//** Redux Selector */
+const targetRestaurantsRetriever = createSelector(
+  retrieveTargetRestaurants,
+  (targetRestaurants) => ({
+    targetRestaurants,
+  })
+);
+
 export function AllRestaurants() {
+  // Initializations
+  const { setTargetRestaurants } = actionDispatch(useDispatch());
+  const { targetRestaurants } = useSelector(targetRestaurantsRetriever);
+
+  useEffect(() => {
+    // TODO: retrieve target restaurants data
+  }, []);
+
   return (
     <div className="all_restaurant">
       <Container>
