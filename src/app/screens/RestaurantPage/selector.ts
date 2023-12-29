@@ -4,7 +4,7 @@ import { AppRootState } from "../../../types/screen";
 const selectRestaurantPage = (state: AppRootState) => state.restaurantPage;
 export const retrieveTargetRestaurants = createSelector(
   selectRestaurantPage,
-  (RestaurantPage) => RestaurantPage?.targetRestaurants
+  (RestaurantPage) => RestaurantPage.targetRestaurants
 );
 export const retrieveRandomRestaurants = createSelector(
   selectRestaurantPage,

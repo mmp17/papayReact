@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Box,
   Button,
@@ -65,16 +66,23 @@ export function AllRestaurants() {
     limit: 8,
     order: "mb_point",
   });
+
   const refs: any = useRef([]);
+  const history = useHistory();
+
   useEffect(() => {
-    const restaurantService = new RestaurantApiServer();
-    restaurantService
+    const restaurantServer = new RestaurantApiServer();
+    restaurantServer
       .getRestaurants(targetSearchObject)
       .then((data) => setTargetRestaurants(data))
       .catch((err) => console.log(err));
   }, [targetSearchObject]); // componentDidUpdate
 
   //  Handlers
+  const chosenRestaurantHandler = (id: string) => {
+    history.push(`/restaurant/${id}`);
+  };
+
   const searchHandler = (category: string) => {
     targetSearchObject.page = 1;
     targetSearchObject.order = category;
@@ -153,12 +161,14 @@ export function AllRestaurants() {
                 const image_path = `${serverApi}/${ele.mb_image}`;
                 return (
                   <Card
+                    onClick={() => chosenRestaurantHandler(ele._id)}
                     variant="outlined"
                     sx={{
                       minHeight: 410,
                       minWidth: 290,
                       mx: "17px",
                       my: "20px",
+                      cursor: "pointer",
                     }}
                     key={ele._id}
                   >

@@ -36,8 +36,8 @@ export function BestDishes() {
   const { trendProducts } = useSelector(trendProductsRetriever);
   // The useEffect hook is used to fetch data when the component mounts
   useEffect(() => {
-    const productService = new ProductApiServer();
-    productService
+    const productServer = new ProductApiServer();
+    productServer
       .getTargetProducts({ order: "product_likes", page: 1, limit: 4 })
       .then((data) => {
         // Upon successful data fetching, it dispatches the

@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, Container, Stack } from "@mui/material";
@@ -11,11 +11,109 @@ import Checkbox from "@mui/material/Checkbox";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import StarIcon from "@mui/icons-material/Star";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
 
-const restaurant_list = Array.from(Array(20).keys());
-const product_list = Array.from(Array(8).keys());
+//Redux
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { useDispatch, useSelector } from "react-redux";
+import RestaurantApiServer from "../../apiServer/restaurantApiServer";
+import ProductApiServer from "../../apiServer/productApiServer";
+import { Product } from "../../../types/product";
+import { ProductSearchObj } from "../../../types/others";
+import { Restaurant } from "../../../types/user";
+import { serverApi } from "../../../lib/config";
+import {
+  setRandomRestaurants,
+  setChosenRestaurant,
+  setTargetProducts,
+} from "../../screens/RestaurantPage/slice";
+import {
+  retrieveRandomRestaurants,
+  retrieveChosenRestaurant,
+  retrieveTargetProducts,
+} from "../../screens/RestaurantPage/selector";
+
+//** Redux Slice */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setRandomRestaurants: (data: Restaurant[]) =>
+    dispatch(setRandomRestaurants(data)),
+  setChosenRestaurant: (data: Restaurant[]) =>
+    dispatch(setChosenRestaurant(data)),
+  setTargetProducts: (data: Product[]) => dispatch(setTargetProducts(data)),
+});
+
+// Redux Selectors
+const randomRestaurantsRetriever = createSelector(
+  retrieveRandomRestaurants,
+  (randomRestaurants) => ({
+    randomRestaurants,
+  })
+);
+const chosenRestaurantRetriever = createSelector(
+  retrieveChosenRestaurant,
+  (chosenRestaurant) => ({
+    chosenRestaurant,
+  })
+);
+const targetRestaurantsRetriever = createSelector(
+  retrieveTargetProducts,
+  (targetProducts) => ({
+    targetProducts,
+  })
+);
+
+// const restaurant_list = Array.from(Array(20).keys());
+// const product_list = Array.from(Array(8).keys());
 
 export function OneRestaurant() {
+  // Initializations
+  const history = useHistory();
+  let { restaurant_id } = useParams<{ restaurant_id: string }>();
+  const { setRandomRestaurants, setChosenRestaurant, setTargetProducts } =
+    actionDispatch(useDispatch());
+
+  const { randomRestaurants } = useSelector(randomRestaurantsRetriever);
+  const { chosenRestaurant } = useSelector(chosenRestaurantRetriever);
+  const { targetProducts } = useSelector(targetRestaurantsRetriever);
+
+  const [chosenRestaurantId, setChosenRestaurantId] =
+    useState<string>(restaurant_id);
+
+  const [targetProductSearchObj, setTargetProductSearchObj] =
+    useState<ProductSearchObj>({
+      page: 1,
+      limit: 8,
+      order: "createdAt",
+      restaurant_mb_id: restaurant_id,
+      product_collection: "dish",
+    });
+
+  useEffect(() => {
+    const restaurantServer = new RestaurantApiServer();
+    restaurantServer
+      .getRestaurants({ page: 1, limit: 10, order: "random" })
+      .then((data) => setRandomRestaurants(data))
+      .catch((err) => console.log(err));
+
+    const productServer = new ProductApiServer();
+    productServer
+      .getTargetProducts(targetProductSearchObj)
+      .then((data) => setTargetProducts(data))
+      .catch((err) => console.log(err));
+  }, [targetProductSearchObj]);
+
+  /** HANDLERS */
+  const chosenRestaurantHandler = (id: string) => {
+    setChosenRestaurantId(id);
+    targetProductSearchObj.restaurant_mb_id = id;
+    setTargetProductSearchObj({ ...targetProductSearchObj });
+    history.push(`/restaurant/${id}`);
+  };
+
   return (
     <div className="single_restaurant">
       <Container>
@@ -62,15 +160,17 @@ export function OneRestaurant() {
                 prevEl: ".restaurant-prev",
               }}
             >
-              {restaurant_list.map((ele, index) => {
+              {randomRestaurants.map((ele: Restaurant) => {
+                const image_path = `${serverApi}/${ele.mb_image}`;
                 return (
                   <SwiperSlide
+                    onClick={() => chosenRestaurantHandler(ele._id)}
                     style={{ cursor: "pointer" }}
-                    key={index}
+                    key={ele._id}
                     className={"restaurant_avatars"}
                   >
-                    <img src={"/restaurant/burak.jpeg"} />
-                    <span>Burak</span>
+                    <img src={image_path} />
+                    <span>{ele.mb_nick}</span>
                   </SwiperSlide>
                 );
               })}
@@ -131,30 +231,38 @@ export function OneRestaurant() {
             </Stack>
 
             <Stack className={"dish_wrapper"}>
-              {product_list.map((ele, index) => {
-                const size_volume = "normal size";
+              {targetProducts.map((product: Product) => {
+                const image_path = `${serverApi}/${product.product_images[0]}`;
+                const size_volume =
+                  product.product_collection === "drink"
+                    ? product.product_volume + "l"
+                    : product.product_size + " Size";
 
                 return (
-                  <Box className={"dish_box"} key={`${index}`}>
+                  <Box className={"dish_box"} key={product._id}>
                     <Box
                       className="dish_img"
-                      sx={{
-                        backgroundImage: `url(
-                        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=768,574"
-                      )`,
-                      }}
+                      sx={{ backgroundImage: `url(${image_path})` }}
                     >
                       <div className={"dish_sale"}>{size_volume}</div>
                       <Button
                         className={"like_view_btn"}
                         style={{ left: "36px" }}
                       >
-                        <Badge badgeContent={8} color={"primary"}>
+                        <Badge
+                          badgeContent={product.product_likes}
+                          color={"primary"}
+                        >
                           <Checkbox
                             icon={<FavoriteBorder style={{ color: "white" }} />}
-                            id={`${index}`}
+                            id={product._id}
                             checkedIcon={<Favorite style={{ color: "red" }} />}
-                            checked={true}
+                            checked={
+                              product?.me_liked &&
+                              product?.me_liked[0]?.my_favorite
+                                ? true
+                                : false
+                            }
                           />
                         </Badge>
                       </Button>
@@ -168,7 +276,10 @@ export function OneRestaurant() {
                         className={"like_view_btn"}
                         style={{ right: "36px" }}
                       >
-                        <Badge badgeContent={1000} color="primary">
+                        <Badge
+                          badgeContent={product.product_views}
+                          color="primary"
+                        >
                           <Checkbox
                             icon={
                               <RemoveRedEyeIcon style={{ color: "white" }} />
@@ -179,10 +290,12 @@ export function OneRestaurant() {
                     </Box>
 
                     <Box className={"dish_desc"}>
-                      <span className={"dish_title_text"}>Chicken Mayo</span>
+                      <span className={"dish_title_text"}>
+                        {product.product_name}
+                      </span>
                       <span className={"dish_desc_text"}>
                         <MonetizationOn />
-                        11
+                        {product.product_price}
                       </span>
                     </Box>
                   </Box>
