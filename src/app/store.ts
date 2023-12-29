@@ -10,7 +10,7 @@ export const store = configureStore({
   reducer: {
     homePage: HomePageReducer,
     //  A slice reducer for the home page, imported from a specific path.
-    restauRantPage: RestaurantPageReducer,
+    restaurantPage: RestaurantPageReducer,
   },
 });
 
