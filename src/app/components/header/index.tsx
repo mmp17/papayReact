@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Badge,
   Box,
@@ -11,9 +12,9 @@ import {
   Stack,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
+import Basket from "./basket";
 
 export function NavbarHome(props: any) {
   // Initializations
@@ -68,19 +69,7 @@ export function NavbarHome(props: any) {
                 Help
               </NavLink>
             </Box>
-            <Box className="hover-line">
-              <IconButton
-                aria-label="cart"
-                id="basic-button"
-                aria-controls={undefined}
-                aria-haspopup="true"
-                aria-expanded={undefined}
-              >
-                <Badge badgeContent={3} color="secondary">
-                  <img src="/icons/shopping_cart.svg" />
-                </Badge>
-              </IconButton>
-            </Box>
+            <Basket />
             {!props.verifiedMemberData ? (
               <Box>
                 <Button
