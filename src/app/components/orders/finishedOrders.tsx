@@ -1,13 +1,26 @@
-import React from "react";
 import TabPanel from "@material-ui/lab/TabPanel";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
+// Redux
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveFinishedOrders } from "../../screens/OrdersPage/selector";
+
+// Redux Selector
+const finishedOrdersRetriever = createSelector(
+  retrieveFinishedOrders,
+  (finishedOrders) => ({
+    finishedOrders,
+  })
+);
 const finishedOrders = [
   [1, 2, 3],
   [1, 2, 3],
 ];
 
-export default function FinishedOrders() {
+export default function FinishedOrders(props: any) {
+  // Initializations
+  // const { finishedOrders } = useSelector(finishedOrdersRetriever);
   return (
     <TabPanel value={"3"}>
       <Stack>

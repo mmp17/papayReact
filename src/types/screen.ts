@@ -9,6 +9,7 @@ import { Order } from "./order";
 export interface AppRootState {
   homePage: HomePageState; // It contains property homePage, typed as HomePageState.
   restaurantPage: RestaurantPageState;
+  ordersPage: OrdersPageState;
 }
 
 // HomePageState Interface
