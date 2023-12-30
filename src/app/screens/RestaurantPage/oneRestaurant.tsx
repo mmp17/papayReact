@@ -72,7 +72,7 @@ const targetRestaurantsRetriever = createSelector(
 // const restaurant_list = Array.from(Array(20).keys());
 // const product_list = Array.from(Array(8).keys());
 
-export function OneRestaurant() {
+export function OneRestaurant(props: any) {
   // Initializations
   const history = useHistory();
   let { restaurant_id } = useParams<{ restaurant_id: string }>();
@@ -350,7 +350,13 @@ export function OneRestaurant() {
                           />
                         </Badge>
                       </Button>
-                      <Button className={"view_btn"}>
+                      <Button
+                        className={"view_btn"}
+                        onClick={(e) => {
+                          props.onAdd(product);
+                          e.stopPropagation();
+                        }}
+                      >
                         <img
                           src={"/icons/shopping_cart.svg"}
                           style={{ display: "flex" }}
