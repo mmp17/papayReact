@@ -1,6 +1,7 @@
 import { BoArticle } from "./boArticle";
 import { Product } from "./product";
 import { Restaurant } from "./user";
+import { Order } from "./order";
 // These are used to type the elements of arrays in the state interfaces.
 
 // AppRootState Interface
@@ -30,5 +31,11 @@ export interface RestaurantPageState {
   chosenProduct: Product | null;
 }
 
+// OrdersPageState Interface
+export interface OrdersPageState {
+  pausedOrders: Order[];
+  processOrders: Order[];
+  finishedOrders: Order[];
+}
 // TypeScript interfaces that are used to define the shape of the state
 // built with Redux, state management library
