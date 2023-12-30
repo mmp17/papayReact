@@ -44,12 +44,14 @@ import MemberApiServer from "../../apiServer/memberApiServer";
 import { serverApi } from "../../../lib/config";
 
 //** Redux Slice */
+// function maps Redux dispatch actions for setting target restaurants in the Redux store.
 const actionDispatch = (dispatch: Dispatch) => ({
   setTargetRestaurants: (data: Restaurant[]) =>
     dispatch(setTargetRestaurants(data)),
 });
 
 // Redux Selector
+// selector to retrieve target restaurants from the Redux state.
 const targetRestaurantsRetriever = createSelector(
   retrieveTargetRestaurants,
   (targetRestaurants) => ({
@@ -68,9 +70,11 @@ export function AllRestaurants() {
   });
 
   const refs: any = useRef([]);
+  //  for referencing DOM elements, particularly for updating likes count.
   const history = useHistory();
 
   useEffect(() => {
+    // hook fetches restaurant data based on the search object and updates Redux state.
     const restaurantServer = new RestaurantApiServer();
     restaurantServer
       .getRestaurants(targetSearchObject)
@@ -79,10 +83,12 @@ export function AllRestaurants() {
   }, [targetSearchObject]); // componentDidUpdate
 
   //  Handlers
+  // navigates to a specific restaurant's detail page.
   const chosenRestaurantHandler = (id: string) => {
     history.push(`/restaurant/${id}`);
   };
 
+  // updates the search criteria based on selected categories.
   const searchHandler = (category: string) => {
     targetSearchObject.page = 1;
     targetSearchObject.order = category;
@@ -97,7 +103,7 @@ export function AllRestaurants() {
   const targetLikeHandler = async (e: any, id: string) => {
     try {
       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
-
+      // The like functionality checks for member data in local storage to ensure user authentication.
       const memberService = new MemberApiServer(),
         like_result = await memberService.memberLikeTarget({
           like_ref_id: id,
@@ -189,6 +195,9 @@ export function AllRestaurants() {
                           bottom: 0,
                           transform: "translateY(50%)",
                           color: "rgba(0,0,0,.4)",
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
                         }}
                       >
                         <Favorite

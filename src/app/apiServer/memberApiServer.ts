@@ -73,7 +73,6 @@ class MemberApiServer {
         });
       assert.ok(result?.data, Definer.general_err1);
       assert.ok(result?.data?.state != "fail", result?.data?.message);
-
       console.log("state", result.data.data);
       const like_result: MemberLiken = result.data.data;
       return like_result;

@@ -22,11 +22,11 @@ export default function FinishedOrders() {
                       <img src={image_path} className={"orderDishImg"} />
                       <p className={"titleDish"}>Grill</p>
                       <Box className={"priceBox"}>
-                        <p>30$</p>
+                        <p>30₩</p>
                         <img src={"/icons/Close.svg"} />
                         <p>3</p>
                         <img src={"/icons/pause.svg"} />
-                        <p style={{ marginLeft: "15px" }}>90$</p>
+                        <p style={{ marginLeft: "15px" }}>90₩</p>
                       </Box>
                     </Box>
                   );
@@ -36,16 +36,16 @@ export default function FinishedOrders() {
               <Box className={"total_price_box red_solid"}>
                 <Box className={"boxTotal"}>
                   <p>Product Price</p>
-                  <p>$90</p>
+                  <p>₩90</p>
                   <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
                   <p>Delivery Service</p>
-                  <p>$2</p>
+                  <p>₩2</p>
                   <img
                     src={"/icons/pause.svg"}
                     style={{ marginLeft: "20px" }}
                   />
                   <p>Total Price</p>
-                  <p>$92</p>
+                  <p>₩92</p>
                 </Box>
               </Box>
             </Box>

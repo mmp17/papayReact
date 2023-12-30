@@ -4,11 +4,11 @@ import { Restaurant } from "./user";
 // These are used to type the elements of arrays in the state interfaces.
 
 // AppRootState Interface
+// is an interface representing the overall shape of application's state.
 export interface AppRootState {
   homePage: HomePageState; // It contains property homePage, typed as HomePageState.
   restaurantPage: RestaurantPageState;
 }
-// is an interface representing the overall shape of application's state.
 
 // HomePageState Interface
 // is an interface that represents the shape of the state specifically for a home page in your application.

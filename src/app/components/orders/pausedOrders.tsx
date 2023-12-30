@@ -23,11 +23,11 @@ export default function PausedOrders(props: any) {
                       <img src={image_path} className={"orderDishImg"} />
                       <p className={"titleDish"}>Kebab</p>
                       <Box className={"priceBox"}>
-                        <p>7$</p>
+                        <p>7₩</p>
                         <img src={"/icons/Close.svg"} />
                         <p>3</p>
                         <img src={"/icons/pause.svg"} />
-                        <p style={{ marginLeft: "15px" }}>21$</p>
+                        <p style={{ marginLeft: "15px" }}>21₩</p>
                       </Box>
                     </Box>
                   );
@@ -37,16 +37,16 @@ export default function PausedOrders(props: any) {
               <Box className={"total_price_box black_solid"}>
                 <Box className={"boxTotal"}>
                   <p>Product Price</p>
-                  <p>$21</p>
+                  <p>₩21</p>
                   <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
                   <p>Delivery Service</p>
-                  <p>$2</p>
+                  <p>₩2</p>
                   <img
                     src={"/icons/pause.svg"}
                     style={{ marginLeft: "20px" }}
                   />
                   <p>Total Price</p>
-                  <p>$89</p>
+                  <p>₩89</p>
                 </Box>
                 <Button variant="contained">Cancel Order</Button>
                 <Button variant="contained">Pay</Button>

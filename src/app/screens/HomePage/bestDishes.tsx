@@ -12,6 +12,7 @@ import ProductApiServer from "../../apiServer/productApiServer";
 import { retrieveTrendProducts } from "./selector";
 import { Product } from "../../../types/product";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 //** REDUX SLICE aka Redux Integration: */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -32,6 +33,7 @@ const trendProductsRetriever = createSelector(
 
 export function BestDishes() {
   // Initializations
+  const history = useHistory();
   const { setTrendProducts } = actionDispatch(useDispatch());
   const { trendProducts } = useSelector(trendProductsRetriever);
   // The useEffect hook is used to fetch data when the component mounts
@@ -46,6 +48,12 @@ export function BestDishes() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // Handlers
+  const chosenDishHandler = (id: string) => {
+    history.push(`/restaurant/dish/${id}`);
+  };
+
   return (
     <div className="best_dishes_frame">
       <Container>
@@ -69,8 +77,11 @@ export function BestDishes() {
                     }}
                   >
                     <div className={"dish_sale"}>{size_volume}</div>
-                    <div className={"view_btn"}>
-                      See details{" "}
+                    <div
+                      className={"view_btn"}
+                      onClick={() => chosenDishHandler(product._id)}
+                    >
+                      See details
                       <img
                         src={"/icons/arrow_right.svg"}
                         style={{ marginLeft: "9px" }}

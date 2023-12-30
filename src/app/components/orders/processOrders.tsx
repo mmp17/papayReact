@@ -25,11 +25,11 @@ export default function ProcessOrders(props: any) {
                       <img src={image_path} className={"orderDishImg"} />
                       <p className={"titleDish"}>Sikh Kebab</p>
                       <Box className={"priceBox"}>
-                        <p>$10</p>
+                        <p>₩10</p>
                         <img src={"/icons/Close.svg"} />
                         <p>3</p>
                         <img src={"/icons/pause.svg"} />
-                        <p style={{ marginLeft: "15px" }}>$30</p>
+                        <p style={{ marginLeft: "15px" }}>₩30</p>
                       </Box>
                     </Box>
                   );
@@ -39,16 +39,16 @@ export default function ProcessOrders(props: any) {
               <Box className={"total_price_box blue_solid"}>
                 <Box className={"boxTotal"}>
                   <p>Product Price</p>
-                  <p>$30</p>
+                  <p>₩30</p>
                   <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
                   <p>Delivery Price</p>
-                  <p>$2</p>
+                  <p>₩2</p>
                   <img
                     src={"/icons/pause.svg"}
                     style={{ marginLeft: "20px" }}
                   />
                   <p>Total Price</p>
-                  <p>$32</p>
+                  <p>₩32</p>
                 </Box>
                 <p className="data_compl">2022-11-04 23:19</p>
                 <Button variant="contained">Finish Order</Button>

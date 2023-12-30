@@ -108,7 +108,7 @@ export function OneRestaurant() {
       .getTargetProducts(targetProductSearchObj)
       .then((data) => setTargetProducts(data))
       .catch((err) => console.log(err));
-  }, [targetProductSearchObj, , productRebuild]);
+  }, [chosenRestaurantId, targetProductSearchObj, , productRebuild]);
 
   /** HANDLERS */
   const chosenRestaurantHandler = (id: string) => {
@@ -123,10 +123,15 @@ export function OneRestaurant() {
     targetProductSearchObj.product_collection = collection;
     setTargetProductSearchObj({ ...targetProductSearchObj });
   };
+
   const searchOrderHandler = (order: string) => {
     targetProductSearchObj.page = 1;
     targetProductSearchObj.order = order;
     setTargetProductSearchObj({ ...targetProductSearchObj });
+  };
+
+  const chosenDishHandler = (id: string) => {
+    history.push(`/restaurant/dish/${id}`);
   };
 
   const targetLikeProduct = async (e: any) => {
@@ -154,7 +159,7 @@ export function OneRestaurant() {
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className={"avatar_big_box"}>
             <Box className={"top_text"}>
-              <p>Texas De Brazil</p>
+              <p>{chosenRestaurant?.mb_nick} Restaurant</p>
               <Box className={"single_search_big_box"}>
                 <form className={"single_search_form"} action={""} method={""}>
                   <input
@@ -309,7 +314,12 @@ export function OneRestaurant() {
                     : product.product_size + " Size";
 
                 return (
-                  <Box className={"dish_box"} key={product._id}>
+                  <Box
+                    onClick={() => chosenDishHandler(product?._id)}
+                    sx={{ cursor: "pointer" }}
+                    className={"dish_box"}
+                    key={product._id}
+                  >
                     <Box
                       className="dish_img"
                       sx={{ backgroundImage: `url(${image_path})` }}
@@ -322,6 +332,9 @@ export function OneRestaurant() {
                         <Badge
                           badgeContent={product.product_likes}
                           color={"primary"}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
                         >
                           <Checkbox
                             icon={<FavoriteBorder style={{ color: "white" }} />}
@@ -429,11 +442,13 @@ export function OneRestaurant() {
         >
           <Box
             className={"about_left"}
-            sx={{ backgroundImage: `url(/restaurant/texas_de_brazil.jpeg)` }}
+            sx={{
+              backgroundImage: `url(${serverApi}/${chosenRestaurant?.mb_image})`,
+            }}
           >
             <div className={"about_left_desc"}>
-              <span>Burak</span>
-              <p>The most delicious cuisine!</p>
+              <span>{chosenRestaurant?.mb_nick}</span>
+              <p>{chosenRestaurant?.mb_description}</p>
             </div>
           </Box>
           <Box className={"about_right"}>
