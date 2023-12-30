@@ -17,13 +17,6 @@ import { Logout } from "@mui/icons-material";
 
 export function NavbarHome(props: any) {
   // Initializations
-  // const [count, setCount] = useState(1); //componentDidMount
-  // const [value, setValue] = useState(true); // componentWillUnmount
-  // Handlers
-  // useEffect(() => {
-  //   setCount(count + 1);
-  // }, [value]); // component DidUpdate
-
   return (
     <div className="format home_navbar">
       <Container>
@@ -51,11 +44,13 @@ export function NavbarHome(props: any) {
                 Restaurants
               </NavLink>
             </Box>
-            <Box className="hover-line" onClick={props.setPath}>
-              <NavLink to="/orders" activeClassName="underline">
-                Orders
-              </NavLink>
-            </Box>
+            {props.verifiedMemberData ? (
+              <Box className="hover-line" onClick={props.setPath}>
+                <NavLink to="/orders" activeClassName="underline">
+                  Orders
+                </NavLink>
+              </Box>
+            ) : null}
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/community" activeClassName="underline">
                 Community
