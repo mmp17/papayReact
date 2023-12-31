@@ -22,9 +22,10 @@ class RestaurantApiServer {
         // It constructs the API endpoint URL for fetching top restaurants with specific query parameters (like order, page, and limit).
         result = await axios.get(this.path + url, { withCredentials: true });
       // option is included to ensure that cookies are sent along with the request, which is important for authenticated sessions.
-      assert.ok(result, Definer.general_err1);
+      assert.ok(result?.data, Definer.general_err1);
       // It uses assert to check if the result of the API call is valid.
 
+      assert.ok(result?.data?.state != "fail", result?.data?.message);
       console.log("result:::", result.data.state);
       // Logs the state of the result
       const top_restaurants: Restaurant[] = result.data.data;
@@ -41,8 +42,8 @@ class RestaurantApiServer {
     try {
       const url = `/restaurants?order=${data.order}&page=${data.page}&limit=${data.limit}`,
         result = await axios.get(this.path + url, { withCredentials: true });
-      assert.ok(result, Definer.general_err1);
-
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state != "fail", result?.data?.message);
       const restaurants: Restaurant[] = result.data.data;
       return restaurants;
     } catch (err: any) {
@@ -55,8 +56,8 @@ class RestaurantApiServer {
     try {
       const url = `/restaurants/${id}`,
         result = await axios.get(this.path + url, { withCredentials: true });
-      assert.ok(result, Definer.general_err1);
-
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state != "fail", result?.data?.message);
       console.log("state:", result.data.state);
       const restaurants: Restaurant[] = result.data.data;
       return restaurants;
