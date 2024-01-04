@@ -13,6 +13,7 @@ import FinishedOrders from "../../components/orders/finishedOrders";
 import Marginer from "../../components/marginer";
 import "../../../css/orders.css";
 import { Order } from "../../../types/order";
+import { Member } from "../../../types/user";
 // Redux
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -36,6 +37,7 @@ export function OrdersPage(props: any) {
     actionDispatch(useDispatch());
 
   const [value, setValue] = useState("1");
+  const verifiedMemberData: Member | null = props.verifiedMemberData;
 
   useEffect(() => {
     const orderServer = new OrderApiServer();
@@ -109,14 +111,22 @@ export function OrdersPage(props: any) {
               <div className={"order_user_img"}>
                 <img
                   className={"order_user_avatar"}
-                  src={"/icons/ergashKarimov.jpeg"}
+                  src={
+                    verifiedMemberData?.mb_image
+                      ? verifiedMemberData.mb_image
+                      : "/icons/user_icon.svg"
+                  }
                 />
                 <div className={"order_user_icon_box"}>
-                  <img src="/icons/user_icon.svg" />
+                  <img src={"/icons/user_icon.svg"} />
                 </div>
               </div>
-              <span className={"order_user_name"}>Joseph</span>
-              <span className={"order_user_prof"}>User</span>
+              <span className={"order_user_name"}>
+                {verifiedMemberData?.mb_nick}
+              </span>
+              <span className={"order_user_prof"}>
+                {verifiedMemberData?.mb_type ?? "User"}
+              </span>
             </Box>
             <div
               style={{
@@ -130,7 +140,7 @@ export function OrdersPage(props: any) {
                 <LocationOnIcon />
               </div>
               <div className={"spec_address_txt"}>
-                Yalanghoch 11A, Mirzo Ulughbek District, Tashkent
+                {verifiedMemberData?.mb_address ?? "No address available"}
               </div>
             </Box>
           </Box>
