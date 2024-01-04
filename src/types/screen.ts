@@ -10,6 +10,7 @@ export interface AppRootState {
   homePage: HomePageState; // It contains property homePage, typed as HomePageState.
   restaurantPage: RestaurantPageState;
   ordersPage: OrdersPageState;
+  communityPage: CommunityPageState;
 }
 
 // HomePageState Interface
@@ -38,5 +39,11 @@ export interface OrdersPageState {
   processOrders: Order[];
   finishedOrders: Order[];
 }
+
+// CommunityPageState Interface
+export interface CommunityPageState {
+  targetBoArticles: BoArticle[];
+}
+
 // TypeScript interfaces that are used to define the shape of the state
 // built with Redux, state management library
