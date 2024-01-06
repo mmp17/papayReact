@@ -1,7 +1,24 @@
-import React, { useState } from "react";
-import { Box, Button, Container, Link, Stack } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Box, Button, Stack } from "@mui/material";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveMemberFollowers } from "../../screens/MemberPage/selector";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setMemberFollowers } from "../../screens/MemberPage/slice";
+import { Follower } from "../../../types/follow";
+
+// Redux Slice
+const actionDispatch = (dispatch: Dispatch) => ({
+  setMemberFollowers: (data: Follower[]) => dispatch(setMemberFollowers(data)),
+});
+
+// Redux Selector
+const memberFollowersRetriever = createSelector(
+  retrieveMemberFollowers,
+  (memberFollowers) => ({
+    memberFollowers,
+  })
+);
 
 const followers = [
   { mb_nick: "Adam", following: true },
@@ -10,6 +27,9 @@ const followers = [
 ];
 
 export function MemberFollowers(props: any) {
+  // Initializations
+  const { setMemberFollowers } = actionDispatch(useDispatch());
+  const { memberFollowers } = useSelector(memberFollowersRetriever);
   return (
     <Stack>
       {followers.map((follower) => {

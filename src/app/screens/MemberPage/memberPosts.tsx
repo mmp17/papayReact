@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Box, Container, Link, Stack } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Button, Container, Stack } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import TabContext from "@material-ui/lab/TabContext";
@@ -23,11 +23,10 @@ import { TViewer } from "../../components/tuiEditor/TViewer";
 const userInfo = [1, 2, 3, 4, 5];
 
 export function VisitMyPage(props: any) {
-  /**Initializations */
+  // Initializations
   const [value, setValue] = useState("1");
-  // alert(value);
 
-  /**HANDLERS */
+  // Handler
   const handleChange = (event: any, newValue: string) => {
     setValue(newValue);
   };

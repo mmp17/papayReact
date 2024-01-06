@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Button, Container, Stack } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import TabContext from "@material-ui/lab/TabContext";
@@ -12,12 +12,67 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { MemberFollowers } from "./memberFollowers";
 import { MemberFollowing } from "./memberFollowing";
 import { TViewer } from "../../components/tuiEditor/TViewer";
+import { Member } from "../../../types/user";
+import { BoArticle } from "../../../types/boArticle";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import {
+  retrieveChosenMember,
+  retrieveChosenMemberBoArticles,
+  retrieveChosenSingleBoArticle,
+} from "../../screens/MemberPage/selector";
+import { Dispatch } from "@reduxjs/toolkit";
+import {
+  setChosenMember,
+  setChosenMemberBoArticles,
+  setChosenSingleBoArticle,
+} from "../../screens/MemberPage/slice";
 
-export function VisitOtherPage() {
-  /**Initializations */
+// Redux Slice
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+  setChosenMemberBoArticles: (data: BoArticle[]) =>
+    dispatch(setChosenMemberBoArticles(data)),
+  setChosenSingleBoArticle: (data: BoArticle) =>
+    dispatch(setChosenSingleBoArticle(data)),
+});
+
+// Redux Selector
+const chosenMemberRetriever = createSelector(
+  retrieveChosenMember,
+  (chosenMember) => ({
+    chosenMember,
+  })
+);
+const chosenMemberBoArticlesRetriever = createSelector(
+  retrieveChosenMemberBoArticles,
+  (chosenMemberBoArticles) => ({
+    chosenMemberBoArticles,
+  })
+);
+const chosenSingleBoArticleRetriever = createSelector(
+  retrieveChosenSingleBoArticle,
+  (chosenSingleBoArticle) => ({
+    chosenSingleBoArticle,
+  })
+);
+
+export function VisitOtherPage(props: any) {
+  // Initializations
+  const {
+    setChosenMember,
+    setChosenMemberBoArticles,
+    setChosenSingleBoArticle,
+  } = actionDispatch(useDispatch());
+  const { chosenMember } = useSelector(chosenMemberRetriever);
+  const { chosenMemberBoArticles } = useSelector(
+    chosenMemberBoArticlesRetriever
+  );
+  const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
   const [value, setValue] = useState("1");
 
-  /**HANDLERS */
+  // Handlers
   const handleChange = (event: any, newValue: string) => {
     setValue(newValue);
   };
