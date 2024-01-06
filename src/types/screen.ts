@@ -1,6 +1,7 @@
 import { BoArticle } from "./boArticle";
+import { Follower, Following } from "./follow";
 import { Product } from "./product";
-import { Restaurant } from "./user";
+import { Member, Restaurant } from "./user";
 import { Order } from "./order";
 // These are used to type the elements of arrays in the state interfaces.
 
@@ -11,6 +12,7 @@ export interface AppRootState {
   restaurantPage: RestaurantPageState;
   ordersPage: OrdersPageState;
   communityPage: CommunityPageState;
+  memberPage: MemberPageState;
 }
 
 // HomePageState Interface
@@ -43,6 +45,15 @@ export interface OrdersPageState {
 // CommunityPageState Interface
 export interface CommunityPageState {
   targetBoArticles: BoArticle[];
+}
+
+// MemberPageState Interface
+export interface MemberPageState {
+  chosenMember: Member | null;
+  chosenMemberBoArticles: BoArticle[];
+  chosenSingleBoArticle?: BoArticle | null;
+  memberFollowers: Follower[];
+  memberFollowings: Following[];
 }
 
 // TypeScript interfaces that are used to define the shape of the state
