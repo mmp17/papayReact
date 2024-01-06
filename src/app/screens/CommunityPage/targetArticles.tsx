@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Box, Checkbox, Link, Stack } from "@mui/material";
 import { Favorite, RemoveRedEye } from "@mui/icons-material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -6,8 +5,33 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { BoArticle } from "../../../types/boArticle";
 import { serverApi } from "../../../lib/config";
 import moment from "moment";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiServer from "../../apiServer/memberApiServer";
 
 export function TargetArticles(props: any) {
+  // Handlers
+  const targetLikeHandler = async (e: any) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+      const memberService = new MemberApiServer();
+      const like_result = await memberService.memberLikeTarget({
+        like_ref_id: e.target.id,
+        group_type: "community",
+      });
+      assert.ok(like_result, Definer.general_err1);
+      await sweetTopSmallSuccessAlert("success", 700, false);
+      props.setArticlesRebuild(new Date());
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
   return (
     <Stack>
       {props.targetBoArticles?.map((article: BoArticle) => {
@@ -68,7 +92,7 @@ export function TargetArticles(props: any) {
                     <span style={{ marginRight: "18px" }}>
                       {moment().format("YY-MM-DD HH:mm")}
                     </span>
-                    <span style={{ marginRight: "8px" }}>
+                    <span style={{ marginRight: "0px" }}>
                       {article?.art_likes}
                     </span>
                     <Checkbox
@@ -76,8 +100,12 @@ export function TargetArticles(props: any) {
                       icon={<FavoriteBorderIcon />}
                       checkedIcon={<Favorite style={{ color: "red" }} />}
                       id={article?._id}
-                      /*@ts-ignore*/
-                      checked={false}
+                      onClick={targetLikeHandler}
+                      checked={
+                        article?.me_liked && article.me_liked[0]?.my_favorite
+                          ? true
+                          : false
+                      }
                     />
 
                     {/* <FavoriteBorderIcon style={{ marginRight: "18px" }} /> */}
