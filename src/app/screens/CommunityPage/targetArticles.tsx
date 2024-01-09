@@ -57,6 +57,7 @@ export function TargetArticles(props: any) {
                   src={image_path}
                   alt="image"
                   width={"35px"}
+                  height={"35px"}
                   style={{ borderRadius: "50%", backgroundSize: "cover" }}
                 />
                 <span className={"all_article_author_user"}>

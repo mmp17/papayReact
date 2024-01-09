@@ -1,5 +1,6 @@
 // React
 import { useEffect, useState } from "react";
+import assert from "assert";
 // Material UI Components
 import {
   Box,
@@ -43,7 +44,11 @@ import { MySettings } from "./mySettings";
 import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
 import { TViewer } from "../../components/tuiEditor/TViewer";
 // Utilities and API Servers
-import { sweetFailureProvider } from "../../../lib/sweetAlert";
+import { Definer } from "../../../lib/Definer";
+import {
+  sweetErrorHandling,
+  sweetFailureProvider,
+} from "../../../lib/sweetAlert";
 import CommunityApiServer from "../../apiServer/communityApiServer";
 import MemberApiServer from "../../apiServer/memberApiServer";
 import { serverApi } from "../../../lib/config";
@@ -82,7 +87,7 @@ const chosenSingleBoArticleRetriever = createSelector(
 
 export function VisitMyPage(props: any) {
   // Initializations
-  const [value, setValue] = useState("1"),
+  const [value, setValue] = useState<string>("1"),
     { verifiedMemberData } = props,
     { setChosenMember, setChosenMemberBoArticles, setChosenSingleBoArticle } =
       actionDispatch(useDispatch()),
@@ -127,6 +132,22 @@ export function VisitMyPage(props: any) {
     setMemberArticleObj({ ...memberArticleObj });
     setValuePage(value);
   };
+  // chosenSingleBoArticleHandler
+  const chosenSingleBoArticleHandler = async (id: string) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      const communityService = new CommunityApiServer();
+      await communityService
+        .chosenSingleBoArticle(id)
+        .then((data) => {
+          setChosenSingleBoArticle(data);
+          setValue("5");
+        })
+        .catch((err) => console.log(err.message));
+    } catch (err: any) {
+      sweetErrorHandling(err);
+    }
+  };
 
   return (
     <div className={"my_page"}>
@@ -141,6 +162,9 @@ export function VisitMyPage(props: any) {
                     <MemberPosts
                       chosenMemberBoArticles={chosenMemberBoArticles}
                       setArticleRebuild={setArticleRebuild}
+                      chosenSingleBoArticleHandler={
+                        chosenSingleBoArticleHandler
+                      }
                     />
                     <Stack
                       sx={{ my: "40px" }}
@@ -243,7 +267,7 @@ export function VisitMyPage(props: any) {
                 <TabPanel value={"5"}>
                   <Box className={"menu_name"}>Chosen article</Box>
                   <Box className={"menu_content"}>
-                    <TViewer text={`<h3>Hello World</h3>`} />
+                    <TViewer chosenSingleBoArticle={chosenSingleBoArticle} />
                   </Box>
                 </TabPanel>
 

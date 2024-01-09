@@ -18,7 +18,11 @@ import MemberApiServer from "../../apiServer/memberApiServer";
 
 export function MemberPosts(props: any) {
   //Initializations
-  const { chosenMemberBoArticles, setArticleRebuild } = props;
+  const {
+    chosenMemberBoArticles,
+    setArticleRebuild,
+    chosenSingleBoArticleHandler,
+  } = props;
   //Handler
   const targetArticleLikeHandler = async (e: any) => {
     try {
@@ -48,8 +52,8 @@ export function MemberPosts(props: any) {
           <Stack>
             <Link
               className={"all_article_box"}
-              sx={{ textDecoration: "none" }}
-              href={""}
+              sx={{ textDecoration: "none", cursor: "pointer" }}
+              onClick={() => chosenSingleBoArticleHandler(article._id)}
             >
               <img
                 className={"all_article_img"}
@@ -67,6 +71,7 @@ export function MemberPosts(props: any) {
                     }
                     // src="/auth/default_user.png"
                     width={"35px"}
+                    height={"35px"}
                     style={{ borderRadius: "50%", backgroundSize: "cover" }}
                   />
                   <span className={"all_article_author_user"}>

@@ -53,5 +53,20 @@ class CommunityApiServer {
       throw err;
     }
   }
+
+  async chosenSingleBoArticle(id: string) {
+    try {
+      const url = `${this.path}/community/single-article/${id}`;
+      const result = await axios.get(url, { withCredentials: true });
+      console.log("chosenSingleBoArticle state::", result.data.state);
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.data, result?.data.message);
+      const article: BoArticle = result.data.data;
+      return article;
+    } catch (err: any) {
+      console.log(`Error::: chosenMemberCommunityArticles, ${err.message}`);
+      throw err;
+    }
+  }
 }
 export default CommunityApiServer;
