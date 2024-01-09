@@ -1,9 +1,11 @@
+// Library Imports
 import axios from "axios";
 import assert from "assert";
+// Utility and Configuration Imports
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/Definer";
-import { Product } from "../../types/product";
-import { CartItem, ProductSearchObj } from "../../types/others";
+// Type Imports
+import { CartItem } from "../../types/others";
 
 class OrderApiServer {
   private readonly path: string;

@@ -1,8 +1,11 @@
 // class designed to handle API calls related to restaurant data, particularly for fetching the top restaurants.
+// Library Imports
 import axios from "axios"; // A promise-based HTTP client for making HTTP requests.
 import assert from "assert"; // Used for assertions within the function.
+// Utility and Configuration Imports
 import { serverApi } from "../../lib/config"; // a base URL for API service endpoints
 import { Definer } from "../../lib/Definer"; // utility for error definitions
+// Type Imports
 import { Restaurant } from "../../types/user"; // TypeScript type or interface defining the structure of a restaurant object.
 import { SearchObj } from "../../types/others";
 

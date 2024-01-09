@@ -1,7 +1,10 @@
+// Library Imports
 import axios from "axios";
 import assert from "assert";
+// Utility and Configuration Imports
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/Definer";
+// Type Imports
 import { ProductSearchObj } from "../../types/others";
 import { Product } from "../../types/product";
 

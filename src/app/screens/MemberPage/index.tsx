@@ -13,6 +13,7 @@ export function MemberPage(props: any) {
   const { verifiedMemberData } = props;
   let member = useRouteMatch();
   console.log("member", member);
+
   const query = useQuery();
   const chosen_mb_id: string | null = query.get("mb_id") ?? null;
   const chosen_art_id: string | null = query.get("art_id") ?? null;

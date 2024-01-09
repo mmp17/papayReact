@@ -1,33 +1,47 @@
-import { useState } from "react";
-import { Box, Button, Container, Stack } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import TabContext from "@material-ui/lab/TabContext";
-import TabList from "@material-ui/lab/TabList";
-import TabPanel from "@material-ui/lab/TabPanel";
-import { MemberPosts } from "./memberPosts";
-import Pagination from "@mui/material/Pagination";
-import PaginationItem from "@mui/material/PaginationItem";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { MemberFollowers } from "./memberFollowers";
-import { MemberFollowing } from "./memberFollowing";
-import { TViewer } from "../../components/tuiEditor/TViewer";
-import { Member } from "../../../types/user";
-import { BoArticle } from "../../../types/boArticle";
+// React
+import { useEffect, useState } from "react";
+// Material UI Components
+import {
+  Box,
+  Button,
+  Container,
+  Pagination,
+  PaginationItem,
+  Stack,
+  Tab,
+} from "@mui/material";
+import {
+  ArrowBack as ArrowBackIcon,
+  ArrowForward as ArrowForwardIcon,
+} from "@mui/icons-material";
+import { TabContext, TabPanel, TabList } from "@mui/lab";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import {
-  retrieveChosenMember,
-  retrieveChosenMemberBoArticles,
-  retrieveChosenSingleBoArticle,
-} from "../../screens/MemberPage/selector";
 import { Dispatch } from "@reduxjs/toolkit";
+// Redux Actions and Selectors
 import {
   setChosenMember,
   setChosenMemberBoArticles,
   setChosenSingleBoArticle,
 } from "../../screens/MemberPage/slice";
+import {
+  retrieveChosenMember,
+  retrieveChosenMemberBoArticles,
+  retrieveChosenSingleBoArticle,
+} from "../../screens/MemberPage/selector";
+// Custom Components
+import { MemberFollowers } from "./memberFollowers";
+import { MemberFollowing } from "./memberFollowing";
+import { MemberPosts } from "./memberPosts";
+import { TViewer } from "../../components/tuiEditor/TViewer";
+// Utilities and API Servers
+import { sweetFailureProvider } from "../../../lib/sweetAlert";
+import CommunityApiServer from "../../apiServer/communityApiServer";
+import MemberApiServer from "../../apiServer/memberApiServer";
+// Types
+import { Member } from "../../../types/user";
+import { BoArticle, SearchMemberArticlesObj } from "../../../types/boArticle";
 
 // Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -65,6 +79,7 @@ export function VisitOtherPage(props: any) {
     setChosenMemberBoArticles,
     setChosenSingleBoArticle,
   } = actionDispatch(useDispatch());
+
   const { chosenMember } = useSelector(chosenMemberRetriever);
   const { chosenMemberBoArticles } = useSelector(
     chosenMemberBoArticlesRetriever

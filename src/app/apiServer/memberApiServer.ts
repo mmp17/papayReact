@@ -1,8 +1,11 @@
+// Library Imports
 import axios from "axios";
 import assert from "assert";
+// Utility and Configuration Imports
 import { serverApi } from "../../lib/config";
-import { Member } from "../../types/user";
 import { Definer } from "../../lib/Definer";
+// Type Imports
+import { Member } from "../../types/user";
 import { MemberLiken } from "../../types/others";
 
 class MemberApiServer {
@@ -78,6 +81,21 @@ class MemberApiServer {
       return like_result;
     } catch (err: any) {
       console.log(`ERROR ::: memberLikeTarget ${err.message}`);
+      throw err;
+    }
+  }
+
+  async getChosenMember(id: string) {
+    try {
+      const url = `${this.path}/member/${id}`;
+      const result = await axios.get(url, { withCredentials: true });
+      console.log("chosenMember state:::", result.data.state);
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.data, result?.data.message);
+      const member: Member = result.data.data;
+      return member;
+    } catch (err: any) {
+      console.log(`Error::: chosenMember, ${err.message}`);
       throw err;
     }
   }

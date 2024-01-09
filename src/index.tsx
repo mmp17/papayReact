@@ -1,11 +1,14 @@
+// React Core and DOM Imports
 import React from "react";
 import { createRoot } from "react-dom/client";
+// Redux Imports
 import { Provider } from "react-redux"; //to make the Redux store available to the rest of the app.
-import { store } from "./app/store"; //
+import { store } from "./app/store";
+// Main App Component & CSS
 import App from "./app/App"; //main React component for the application
+import "./css/index.css";
 import reportWebVitals from "./reportWebVitals"; // is a function that can be used to measure the performance of our app (optional and can be used for logging or analytics purposes).
-import "./css/index.css"; // stylesheet
-
+// Material UI Imports
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
