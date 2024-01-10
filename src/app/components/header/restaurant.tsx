@@ -1,17 +1,17 @@
-import React from "react";
+// React Router Import
+import { NavLink } from "react-router-dom";
+// Material UI Component and Icon Imports
 import {
-  Badge,
   Box,
   Button,
   Container,
-  IconButton,
   ListItemIcon,
   Menu,
   MenuItem,
   Stack,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
+// Local Component Import
 import Basket from "./basket";
 
 export function NavbarRestaurant(props: any) {

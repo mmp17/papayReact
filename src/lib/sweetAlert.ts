@@ -1,5 +1,4 @@
 /** SweetAlertHandling **/
-
 import Swal from "sweetalert2";
 import { Definer } from "./Definer";
 

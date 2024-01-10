@@ -1,34 +1,26 @@
+// React Core Import
 import React, { useEffect, useState } from "react";
+// React Router Imports
 import { useHistory, useParams } from "react-router-dom";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import SearchIcon from "@mui/icons-material/Search";
-import { Box, Button, Container, Stack } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Favorite, FavoriteBorder, MonetizationOn } from "@mui/icons-material";
-import Badge from "@mui/material/Badge";
-import Checkbox from "@mui/material/Checkbox";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import StarIcon from "@mui/icons-material/Star";
-import assert from "assert";
-import { Definer } from "../../../lib/Definer";
-import MemberApiServer from "../../apiServer/memberApiServer";
+// Material UI Component and Icon Imports
+import { Box, Button, Container, Stack, Badge, Checkbox } from "@mui/material";
 import {
-  sweetErrorHandling,
-  sweetTopSmallSuccessAlert,
-} from "../../../lib/sweetAlert";
+  ArrowBackIosNew,
+  ArrowForwardIos,
+  Favorite,
+  FavoriteBorder,
+  MonetizationOn,
+  RemoveRedEye,
+  Search,
+  Star,
+} from "@mui/icons-material";
 
-//Redux
+// Swiper Imports
+import { Swiper, SwiperSlide } from "swiper/react";
+// Redux Imports
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { useDispatch, useSelector } from "react-redux";
-import RestaurantApiServer from "../../apiServer/restaurantApiServer";
-import ProductApiServer from "../../apiServer/productApiServer";
-import { Product } from "../../../types/product";
-import { ProductSearchObj } from "../../../types/others";
-import { Restaurant } from "../../../types/user";
-import { serverApi } from "../../../lib/config";
 import {
   setRandomRestaurants,
   setChosenRestaurant,
@@ -39,8 +31,24 @@ import {
   retrieveChosenRestaurant,
   retrieveTargetProducts,
 } from "../../screens/RestaurantPage/selector";
+// API Server Imports
+import MemberApiServer from "../../apiServer/memberApiServer";
+import RestaurantApiServer from "../../apiServer/restaurantApiServer";
+import ProductApiServer from "../../apiServer/productApiServer";
+// Utility and Configuration Imports
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
+import { serverApi } from "../../../lib/config";
+// Type Imports
+import { Product } from "../../../types/product";
+import { ProductSearchObj } from "../../../types/others";
+import { Restaurant } from "../../../types/user";
 
-//** Redux Slice */
+// Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
   setRandomRestaurants: (data: Restaurant[]) =>
     dispatch(setRandomRestaurants(data)),
@@ -74,17 +82,15 @@ const targetRestaurantsRetriever = createSelector(
 
 export function OneRestaurant(props: any) {
   // Initializations
-  const history = useHistory();
   let { restaurant_id } = useParams<{ restaurant_id: string }>();
-  const { setRandomRestaurants, setChosenRestaurant, setTargetProducts } =
-    actionDispatch(useDispatch());
-
-  const { randomRestaurants } = useSelector(randomRestaurantsRetriever);
-  const { chosenRestaurant } = useSelector(chosenRestaurantRetriever);
-  const { targetProducts } = useSelector(targetRestaurantsRetriever);
-
-  const [chosenRestaurantId, setChosenRestaurantId] =
-    useState<string>(restaurant_id);
+  const history = useHistory(),
+    { setRandomRestaurants, setChosenRestaurant, setTargetProducts } =
+      actionDispatch(useDispatch()),
+    { randomRestaurants } = useSelector(randomRestaurantsRetriever),
+    { chosenRestaurant } = useSelector(chosenRestaurantRetriever),
+    { targetProducts } = useSelector(targetRestaurantsRetriever),
+    [chosenRestaurantId, setChosenRestaurantId] =
+      useState<string>(restaurant_id);
 
   const [targetProductSearchObj, setTargetProductSearchObj] =
     useState<ProductSearchObj>({
@@ -110,7 +116,7 @@ export function OneRestaurant(props: any) {
       .catch((err) => console.log(err));
   }, [chosenRestaurantId, targetProductSearchObj, , productRebuild]);
 
-  /** HANDLERS */
+  //  Handlers
   const chosenRestaurantHandler = (id: string) => {
     setChosenRestaurantId(id);
     targetProductSearchObj.restaurant_mb_id = id;
@@ -171,7 +177,7 @@ export function OneRestaurant(props: any) {
                   <Button
                     className={"single_button_search"}
                     variant={"contained"}
-                    endIcon={<SearchIcon />}
+                    endIcon={<Search />}
                   ></Button>
                 </form>
               </Box>
@@ -184,7 +190,7 @@ export function OneRestaurant(props: any) {
             sx={{ mt: "35px" }}
           >
             <Box className={"prev_btn restaurant-prev"}>
-              <ArrowBackIosNewIcon
+              <ArrowBackIosNew
                 sx={{ fontSize: 40 }}
                 style={{ color: "white" }}
               />
@@ -218,7 +224,7 @@ export function OneRestaurant(props: any) {
               className={"next_btn restaurant-next"}
               style={{ color: "white" }}
             >
-              <ArrowForwardIosIcon sx={{ fontSize: 40 }} />
+              <ArrowForwardIos sx={{ fontSize: 40 }} />
             </Box>
           </Stack>
 
@@ -371,9 +377,7 @@ export function OneRestaurant(props: any) {
                           color="primary"
                         >
                           <Checkbox
-                            icon={
-                              <RemoveRedEyeIcon style={{ color: "white" }} />
-                            }
+                            icon={<RemoveRedEye style={{ color: "white" }} />}
                           />
                         </Badge>
                       </Button>
@@ -425,11 +429,11 @@ export function OneRestaurant(props: any) {
                     is very good.
                   </p>
                   <div className={"review_stars"}>
-                    <StarIcon style={{ color: "#F2BD57" }} />
-                    <StarIcon style={{ color: "#F2BD57" }} />
-                    <StarIcon style={{ color: "#F2BD57" }} />
-                    <StarIcon style={{ color: "whitesmoke" }} />
-                    <StarIcon style={{ color: "whitesmoke" }} />
+                    <Star style={{ color: "#F2BD57" }} />
+                    <Star style={{ color: "#F2BD57" }} />
+                    <Star style={{ color: "#F2BD57" }} />
+                    <Star style={{ color: "whitesmoke" }} />
+                    <Star style={{ color: "whitesmoke" }} />
                   </div>
                 </Box>
               );

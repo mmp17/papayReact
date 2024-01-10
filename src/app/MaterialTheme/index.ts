@@ -1,5 +1,7 @@
+// Material UI Theme and Color Imports
 import { createTheme } from "@mui/material/styles";
 import { common } from "@mui/material/colors";
+// Local Customization Imports
 import shadow from "./shadow";
 import typography from "./typography";
 

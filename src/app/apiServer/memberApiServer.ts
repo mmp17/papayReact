@@ -15,7 +15,7 @@ class MemberApiServer {
     this.path = serverApi;
   }
 
-  public async loginRequest(login_data: any) {
+  public async loginRequest(login_data: any): Promise<Member> {
     try {
       const result = await axios.post(this.path + "/login", login_data, {
         withCredentials: true,
@@ -33,7 +33,7 @@ class MemberApiServer {
     }
   }
 
-  public async signupRequest(signup_data: any) {
+  public async signupRequest(signup_data: any): Promise<Member> {
     try {
       const result = await axios.post(this.path + "/signup", signup_data, {
         withCredentials: true,
@@ -51,7 +51,7 @@ class MemberApiServer {
     }
   }
 
-  public async logOutRequest() {
+  public async logOutRequest(): Promise<any> {
     try {
       const result = await axios.get(this.path + "/logout", {
         withCredentials: true,
@@ -68,7 +68,7 @@ class MemberApiServer {
     }
   }
 
-  public async memberLikeTarget(data: any) {
+  public async memberLikeTarget(data: any): Promise<MemberLiken> {
     try {
       const url = "/member-liken",
         result = await axios.post(this.path + url, data, {
@@ -85,10 +85,10 @@ class MemberApiServer {
     }
   }
 
-  async getChosenMember(id: string) {
+  async getChosenMember(id: string): Promise<Member> {
     try {
-      const url = `${this.path}/member/${id}`;
-      const result = await axios.get(url, { withCredentials: true });
+      const url = `${this.path}/member/${id}`,
+        result = await axios.get(url, { withCredentials: true });
       console.log("chosenMember state:::", result.data.state);
       assert.ok(result?.data, Definer.general_err1);
       assert.ok(result?.data?.data, result?.data.message);

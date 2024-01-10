@@ -1,4 +1,6 @@
+// Redux Toolkit Import
 import { createSelector } from "reselect";
+// Type Import
 import { AppRootState } from "../../../types/screen";
 
 const selectCommunityPage = (state: AppRootState) => state.communityPage;

@@ -1,4 +1,4 @@
-import React from "react";
+// Material UI Component Imports
 import { Avatar, Box, Container, Stack } from "@mui/material";
 
 export function Recommendations() {

@@ -1,7 +1,9 @@
-import React from "react";
+// Material UI Component Imports
 import { Box, Container, Stack } from "@mui/material";
+// Swiper Imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+// Swiper Initialization
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 export function Events() {

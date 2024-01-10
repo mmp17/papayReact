@@ -1,27 +1,31 @@
+// React Import
 import React, { useEffect } from "react";
-import { MonetizationOn } from "@mui/icons-material";
+// React Router Import
+import { useHistory } from "react-router-dom";
+// Material UI Component and Icon Imports
 import { Box, Container, Stack } from "@mui/material";
-//Redux
+import { MonetizationOn } from "@mui/icons-material";
+// Redux Imports
 import { useDispatch, useSelector } from "react-redux";
-// Redux's useDispatch and useSelector hooks are used
-// for dispatching actions and accessing the Redux state.
+// Redux's useDispatch and useSelector hooks are used for dispatching actions and accessing the Redux state.
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { setTrendProducts } from "../../screens/HomePage/slice";
-import ProductApiServer from "../../apiServer/productApiServer";
 import { retrieveTrendProducts } from "./selector";
-import { Product } from "../../../types/product";
+// API Server & Utility Imports
+import ProductApiServer from "../../apiServer/productApiServer";
 import { serverApi } from "../../../lib/config";
-import { useHistory } from "react-router-dom";
+// Type Import
+import { Product } from "../../../types/product";
 
-//** REDUX SLICE aka Redux Integration: */
+// Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
   // is a function that maps Redux dispatch actions to a more convenient format.
   // It encapsulates the setTrendProducts action for updating the trending products in the Redux store.
   setTrendProducts: (data: Product[]) => dispatch(setTrendProducts(data)),
 });
 
-//** Redux Selector */
+// Redux Selector
 // selector created using createSelector from reselect
 // to efficiently retrieve trending products from the Redux state.
 const trendProductsRetriever = createSelector(
@@ -33,9 +37,9 @@ const trendProductsRetriever = createSelector(
 
 export function BestDishes() {
   // Initializations
-  const history = useHistory();
-  const { setTrendProducts } = actionDispatch(useDispatch());
-  const { trendProducts } = useSelector(trendProductsRetriever);
+  const history = useHistory(),
+    { setTrendProducts } = actionDispatch(useDispatch()),
+    { trendProducts } = useSelector(trendProductsRetriever);
   // The useEffect hook is used to fetch data when the component mounts
   useEffect(() => {
     const productServer = new ProductApiServer();

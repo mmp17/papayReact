@@ -1,5 +1,12 @@
-import React, { useRef } from "react";
+// React Import
+import { useRef } from "react";
+// React Router Import
+import { useHistory } from "react-router-dom";
+// External Library Import
+import assert from "assert";
+// Material UI Component Imports
 import { Box, Button, Container, Stack } from "@mui/material";
+// Material UI Joy Component Imports
 import {
   AspectRatio,
   Card,
@@ -9,19 +16,18 @@ import {
   Link,
   Typography,
 } from "@mui/joy";
+// Material UI Icon Imports
 import Favorite from "@mui/icons-material/Favorite";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import CallIcon from "@mui/icons-material/Call";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { SentimentNeutral } from "@mui/icons-material";
-import assert from "assert";
+// API Server and Utility Imports
 import MemberApiService from "../../apiServer/memberApiServer";
 import { Definer } from "../../../lib/Definer";
 import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
-import { useHistory } from "react-router-dom";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -30,7 +36,7 @@ import { retrieveBestRestaurants } from "../../screens/HomePage/selector";
 import { Restaurant } from "../../../types/user";
 import { serverApi } from "../../../lib/config";
 
-//** Redux Selector */
+// Redux Selector
 const bestRestaurantsRetriever = createSelector(
   retrieveBestRestaurants,
   (bestRestaurants) => ({
@@ -40,40 +46,40 @@ const bestRestaurantsRetriever = createSelector(
 
 export function BestRestaurants() {
   // Initializations
-  const { bestRestaurants } = useSelector(bestRestaurantsRetriever);
-  const history = useHistory();
-  const refs: any = useRef([]);
+  const { bestRestaurants } = useSelector(bestRestaurantsRetriever),
+    history = useHistory(),
+    refs: any = useRef([]);
 
   /** Handlers */
   const chosenRestaurantHandler = (id: string) => {
-    history.push(`/restaurant/${id}`);
-  };
-  const goRestaurantHandler = () => history.push("/restaurant");
-  const targetLikeBest = async (e: any, id: string) => {
-    try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      history.push(`/restaurant/${id}`);
+    },
+    goRestaurantHandler = () => history.push("/restaurant"),
+    targetLikeBest = async (e: any, id: string) => {
+      try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
 
-      const memberService = new MemberApiService(),
-        like_result: any = await memberService.memberLikeTarget({
-          like_ref_id: id,
-          group_type: "member",
-        });
-      assert.ok(like_result, Definer.general_err1);
+        const memberService = new MemberApiService(),
+          like_result: any = await memberService.memberLikeTarget({
+            like_ref_id: id,
+            group_type: "member",
+          });
+        assert.ok(like_result, Definer.general_err1);
 
-      if (like_result.like_status > 0) {
-        e.target.style.fill = "red";
-        refs.current[like_result.like_ref_id].innerHTML++;
-      } else {
-        e.target.style.fill = "white";
-        refs.current[like_result.like_ref_id].innerHTML--;
+        if (like_result.like_status > 0) {
+          e.target.style.fill = "red";
+          refs.current[like_result.like_ref_id].innerHTML++;
+        } else {
+          e.target.style.fill = "white";
+          refs.current[like_result.like_ref_id].innerHTML--;
+        }
+
+        await sweetTopSmallSuccessAlert("success", 700, false);
+      } catch (err: any) {
+        console.log("targetLikeBest, ERROR:", err);
+        sweetErrorHandling(err).then();
       }
-
-      await sweetTopSmallSuccessAlert("success", 700, false);
-    } catch (err: any) {
-      console.log("targetLikeBest, ERROR:", err);
-      sweetErrorHandling(err).then();
-    }
-  };
+    };
 
   return (
     <div className="best_restaurant_frame">

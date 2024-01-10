@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "@mui/system";
+// React Import
+import { useEffect, useState } from "react";
+// Material UI Component and Icon Imports
 import { Box, Stack } from "@mui/material";
 import Tab from "@mui/material/Tab";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { Container } from "@mui/system";
+// Material UI Lab Imports
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-
+// CSS Import
+import "../../../css/orders.css";
+// Local Component Imports
 import PausedOrders from "../../components/orders/pausedOrders";
 import ProcessOrders from "../../components/orders/processOrders";
 import FinishedOrders from "../../components/orders/finishedOrders";
-import Marginer from "../../components/marginer";
-import "../../../css/orders.css";
+// Type Imports
 import { Order } from "../../../types/order";
 import { Member } from "../../../types/user";
+
 // Redux
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -34,10 +39,9 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export function OrdersPage(props: any) {
   // Initializations
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
-    actionDispatch(useDispatch());
-
-  const [value, setValue] = useState("1");
-  const verifiedMemberData: Member | null = props.verifiedMemberData;
+      actionDispatch(useDispatch()),
+    [value, setValue] = useState("1"),
+    verifiedMemberData: Member | null = props.verifiedMemberData;
 
   useEffect(() => {
     const orderServer = new OrderApiServer();

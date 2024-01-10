@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+// React Import
+import { useEffect } from "react";
+// Material UI Component Import
 import { Container } from "@mui/material";
+// Local Component Imports
 import { Statistics } from "./statistics";
 import { TopRestaurants } from "./topRestaurants";
 import { BestRestaurants } from "./bestRestaurants";
@@ -7,6 +10,7 @@ import { BestDishes } from "./bestDishes";
 import { Advertisements } from "./advertisements";
 import { Events } from "./events";
 import { Recommendations } from "./recommendations";
+// CSS Import
 import "../../../css/home.css";
 
 //Redux
@@ -41,9 +45,9 @@ export function HomePage() {
 
   // Initializations
   const { setTopRestaurants, setBestRestaurants } = actionDispatch(
-    useDispatch()
-  );
-  const { topRestaurants } = useSelector(topRestaurantsRetriever);
+      useDispatch()
+    ),
+    { topRestaurants } = useSelector(topRestaurantsRetriever);
 
   console.log("topRestaurants:::", topRestaurants);
 

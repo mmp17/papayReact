@@ -1,24 +1,32 @@
+// React Import
 import React, { useEffect, useState } from "react";
+// Material UI Component and Icon Imports
 import { Box, Container, Stack } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import { TargetArticles } from "./targetArticles";
-import { CommunityChats } from "./communityChats";
+import PaginationItem from "@mui/material/PaginationItem";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// Material UI Lab Imports
 import Tab from "@material-ui/core/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
-import PaginationItem from "@mui/material/PaginationItem";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// Local Component Imports
+import { TargetArticles } from "./targetArticles";
+import { CommunityChats } from "./communityChats";
+// CSS Import
 import "../../../css/community.css";
-import { BoArticle, SearchArticlesObj } from "../../../types/boArticle";
+// API Server and Redux Toolkit Import
 import CommunityApiServer from "../../apiServer/communityApiServer";
 import { Dispatch } from "@reduxjs/toolkit";
+// Type Import
+import { BoArticle, SearchArticlesObj } from "../../../types/boArticle";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveTargetBoArticles } from "./selector";
 import { createSelector } from "reselect";
 import { setTargetBoArticles } from "./slice";
+
 // Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
   setTargetBoArticles: (data: BoArticle[]) =>
@@ -35,18 +43,15 @@ const targetBoArticlesRetriever = createSelector(
 
 export function CommunityPage(props: any) {
   // Initializations
-  const { setTargetBoArticles } = actionDispatch(useDispatch());
-  const { targetBoArticles } = useSelector(targetBoArticlesRetriever);
-  const [value, setValue] = React.useState("1");
-  const [SearchArticlesObj, setSearchArticlesObj] = useState<SearchArticlesObj>(
-    {
+  const { setTargetBoArticles } = actionDispatch(useDispatch()),
+    { targetBoArticles } = useSelector(targetBoArticlesRetriever),
+    [value, setValue] = React.useState("1"),
+    [SearchArticlesObj, setSearchArticlesObj] = useState<SearchArticlesObj>({
       bo_id: "all",
       page: 1,
       limit: 5,
-    }
-  );
-
-  const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+    }),
+    [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
 
   useEffect(() => {
     const communityService = new CommunityApiServer();

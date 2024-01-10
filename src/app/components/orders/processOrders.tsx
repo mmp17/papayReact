@@ -1,12 +1,11 @@
-import TabPanel from "@material-ui/lab/TabPanel";
-import { Box, Button, Stack } from "@mui/material";
-
-// Redux
+// Redux Imports
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveProcessOrders } from "../../screens/OrdersPage/selector";
-import { Order } from "../../../types/order";
-import { Product } from "../../../types/product";
+// Material UI Imports
+import TabPanel from "@material-ui/lab/TabPanel";
+import { Box, Button, Stack } from "@mui/material";
+// Utilities and API Server Imports
 import { serverApi } from "../../../lib/config";
 import moment from "moment";
 import {
@@ -14,6 +13,8 @@ import {
   sweetFailureProvider,
 } from "../../../lib/sweetAlert";
 import OrderApiServer from "../../apiServer/orderApiServer";
+// Type Import
+import { Product } from "../../../types/product";
 
 // Redux Selector
 const processOrdersRetriever = createSelector(
@@ -30,8 +31,8 @@ export default function ProcessOrders(props: any) {
 
   const finishOrderHandler = async (event: any) => {
     try {
-      const order_id = event.target.value;
-      const data = { order_id: order_id, order_status: "FINISHED" };
+      const order_id = event.target.value,
+        data = { order_id: order_id, order_status: "FINISHED" };
 
       if (!localStorage.getItem("member_data")) {
         sweetFailureProvider("Please login first", true);

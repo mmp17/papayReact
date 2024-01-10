@@ -102,6 +102,7 @@ export function VisitMyPage(props: any) {
       }
     ),
     [rebuildArticle, setArticleRebuild] = useState<Date>(new Date()),
+    [followRebuild, setFollowRebuild] = useState<Date>(new Date()),
     [valuePage, setValuePage] = useState<number>(1);
   // Hooks
   useEffect(() => {
@@ -200,14 +201,19 @@ export function VisitMyPage(props: any) {
                 <TabPanel value="2">
                   <Box className={"menu_name"}>Followers</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowers actions_enabled={true} />
+                    <MemberFollowers
+                      actions_enabled={true}
+                      mb_id={verifiedMemberData?._id}
+                      followRebuild={followRebuild}
+                      setFollowRebuild={setFollowRebuild}
+                    />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"
                       alignItems={"center"}
                       justifyContent="center"
                     >
-                      <Box className={"bottom_box"}>
+                      {/* <Box className={"bottom_box"}>
                         <Pagination
                           count={5}
                           page={1}
@@ -222,7 +228,7 @@ export function VisitMyPage(props: any) {
                             />
                           )}
                         />
-                      </Box>
+                      </Box> */}
                     </Stack>
                   </Box>
                 </TabPanel>
@@ -230,30 +236,18 @@ export function VisitMyPage(props: any) {
                 <TabPanel value="3">
                   <Box className={"menu_name"}>Following</Box>
                   <Box className={"menu_content"}>
-                    <MemberFollowing actions_enabled={true} />
+                    <MemberFollowing
+                      actions_enabled={true}
+                      mb_id={verifiedMemberData?._id}
+                      followRebuild={followRebuild}
+                      setFollowRebuild={setFollowRebuild}
+                    />
                     <Stack
                       sx={{ my: "40px" }}
                       direction="row"
                       alignItems={"center"}
                       justifyContent="center"
-                    >
-                      <Box className={"bottom_box"}>
-                        <Pagination
-                          count={5}
-                          page={1}
-                          renderItem={(item) => (
-                            <PaginationItem
-                              components={{
-                                previous: ArrowBack,
-                                next: ArrowForward,
-                              }}
-                              {...item}
-                              color={"secondary"}
-                            />
-                          )}
-                        />
-                      </Box>
-                    </Stack>
+                    ></Stack>
                   </Box>
                 </TabPanel>
 
@@ -304,7 +298,13 @@ export function VisitMyPage(props: any) {
                       alt="image"
                     />
                     <div className={"order_user_icon_box"}>
-                      <img src="/icons/user_icon.svg" />
+                      <img
+                        src={
+                          chosenMember?.mb_type === "RESTAURANT"
+                            ? "/icons/restaurant.svg"
+                            : "/icons/user_icon.svg"
+                        }
+                      />
                     </div>
                   </div>
                   <span className={"order_user_name"}>
@@ -322,10 +322,10 @@ export function VisitMyPage(props: any) {
                 </div>
                 <Box className={"user_media_box"}>
                   <p className="follows">
-                    Followers: {chosenMember?.mb_follow_cnt}
+                    Followers: {chosenMember?.mb_subscriber_cnt}
                   </p>
                   <p className="follows">
-                    Following: {chosenMember?.me_followed.length}
+                    Following: {chosenMember?.mb_follow_cnt}
                   </p>
                 </Box>
                 <p>

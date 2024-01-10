@@ -1,5 +1,5 @@
+// Material-UI Component Imports
 import { Box, Container, Stack } from "@mui/material";
-import React from "react";
 
 export function Footer() {
   return (

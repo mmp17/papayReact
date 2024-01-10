@@ -1,5 +1,6 @@
 // data writer: it is an implementation of a Redux slice using Redux Toolkit, specifically for the homepage of an application.
 import { createSlice } from "@reduxjs/toolkit";
+// Type Import
 import { HomePageState } from "../../../types/screen";
 
 const initialState: HomePageState = {

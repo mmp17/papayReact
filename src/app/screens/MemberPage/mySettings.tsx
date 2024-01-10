@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Box, Container, Stack } from "@mui/material";
+// Material UI Component Imports
+import { Box, Stack, Button } from "@mui/material";
+// Material UI Icon Import
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import Button from "@mui/material/Button";
 
 export function MySettings(props: any) {
   return (

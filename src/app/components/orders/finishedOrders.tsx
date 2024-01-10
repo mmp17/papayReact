@@ -1,13 +1,14 @@
+// Material UI Imports
 import TabPanel from "@material-ui/lab/TabPanel";
 import { Box, Stack } from "@mui/material";
-
-// Redux
+// Redux Imports
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveFinishedOrders } from "../../screens/OrdersPage/selector";
-import { Order } from "../../../types/order";
-import { Product } from "../../../types/product";
+// Utility Import
 import { serverApi } from "../../../lib/config";
+// Type Import
+import { Product } from "../../../types/product";
 
 // Redux Selector
 const finishedOrdersRetriever = createSelector(

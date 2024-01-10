@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// React
+import { useState } from "react";
+// Material UI
 import { Avatar, Box, Stack } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 

@@ -1,5 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+// React Hooks Import
+import { useEffect, useState, useRef } from "react";
+// React Router Import
 import { useHistory } from "react-router-dom";
+// Material UI Component and Icon Imports
 import {
   Box,
   Button,
@@ -8,7 +11,16 @@ import {
   PaginationItem,
   Stack,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import {
+  Search,
+  Favorite,
+  Visibility,
+  Call,
+  LocationOnRounded,
+  ArrowForward,
+  ArrowBack,
+} from "@mui/icons-material";
+// Material UI Joy Component Imports
 import {
   AspectRatio,
   Card,
@@ -18,32 +30,29 @@ import {
   Link,
   Typography,
 } from "@mui/joy";
-import Favorite from "@mui/icons-material/Favorite";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import CallIcon from "@mui/icons-material/Call";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// Utility Imports
 import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
-
-//Redux
+// Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { setTargetRestaurants } from "../../screens/RestaurantPage/slice";
 import { retrieveTargetRestaurants } from "../../screens/RestaurantPage/selector";
-import { Restaurant } from "../../../types/user";
-import { SearchObj } from "../../../types/others";
+// API Server Imports
 import RestaurantApiServer from "../../apiServer/restaurantApiServer";
+import MemberApiServer from "../../apiServer/memberApiServer";
+// Utility and Configuration Imports
 import assert from "assert";
 import { Definer } from "../../../lib/Definer";
-import MemberApiServer from "../../apiServer/memberApiServer";
 import { serverApi } from "../../../lib/config";
+// Type Imports
+import { Restaurant } from "../../../types/user";
+import { SearchObj } from "../../../types/others";
 
-//** Redux Slice */
+// Redux Slice
 // function maps Redux dispatch actions for setting target restaurants in the Redux store.
 const actionDispatch = (dispatch: Dispatch) => ({
   setTargetRestaurants: (data: Restaurant[]) =>
@@ -61,17 +70,16 @@ const targetRestaurantsRetriever = createSelector(
 
 export function AllRestaurants() {
   // Initializations
-  const { setTargetRestaurants } = actionDispatch(useDispatch());
-  const { targetRestaurants } = useSelector(targetRestaurantsRetriever);
-  const [targetSearchObject, setTargetSearchObject] = useState<SearchObj>({
-    page: 1,
-    limit: 8,
-    order: "mb_point",
-  });
-
-  const refs: any = useRef([]);
-  //  for referencing DOM elements, particularly for updating likes count.
-  const history = useHistory();
+  const { setTargetRestaurants } = actionDispatch(useDispatch()),
+    { targetRestaurants } = useSelector(targetRestaurantsRetriever),
+    [targetSearchObject, setTargetSearchObject] = useState<SearchObj>({
+      page: 1,
+      limit: 8,
+      order: "mb_point",
+    }),
+    refs: any = useRef([]),
+    //  for referencing DOM elements, particularly for updating likes count.
+    history = useHistory();
 
   useEffect(() => {
     // hook fetches restaurant data based on the search object and updates Redux state.
@@ -90,41 +98,39 @@ export function AllRestaurants() {
 
   // updates the search criteria based on selected categories.
   const searchHandler = (category: string) => {
-    targetSearchObject.page = 1;
-    targetSearchObject.order = category;
-    setTargetSearchObject({ ...targetSearchObject });
-  };
+      targetSearchObject.page = 1;
+      targetSearchObject.order = category;
+      setTargetSearchObject({ ...targetSearchObject });
+    },
+    handlePaginationChange = (event: any, value: number) => {
+      targetSearchObject.page = value;
+      setTargetSearchObject({ ...targetSearchObject });
+    },
+    targetLikeHandler = async (e: any, id: string) => {
+      try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+        // The like functionality checks for member data in local storage to ensure user authentication.
+        const memberService = new MemberApiServer(),
+          like_result = await memberService.memberLikeTarget({
+            like_ref_id: id,
+            group_type: "member",
+          });
+        assert.ok(like_result, Definer.general_err1);
 
-  const handlePaginationChange = (event: any, value: number) => {
-    targetSearchObject.page = value;
-    setTargetSearchObject({ ...targetSearchObject });
-  };
+        if (like_result.like_status > 0) {
+          e.target.style.fill = "red";
+          refs.current[like_result.like_ref_id].innerHTML++;
+        } else {
+          e.target.style.fill = "white";
+          refs.current[like_result.like_ref_id].innerHTML--;
+        }
 
-  const targetLikeHandler = async (e: any, id: string) => {
-    try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
-      // The like functionality checks for member data in local storage to ensure user authentication.
-      const memberService = new MemberApiServer(),
-        like_result = await memberService.memberLikeTarget({
-          like_ref_id: id,
-          group_type: "member",
-        });
-      assert.ok(like_result, Definer.general_err1);
-
-      if (like_result.like_status > 0) {
-        e.target.style.fill = "red";
-        refs.current[like_result.like_ref_id].innerHTML++;
-      } else {
-        e.target.style.fill = "white";
-        refs.current[like_result.like_ref_id].innerHTML--;
+        await sweetTopSmallSuccessAlert("success", 700, false);
+      } catch (err: any) {
+        console.log("targetLikeTop, ERROR:", err);
+        sweetErrorHandling(err).then();
       }
-
-      await sweetTopSmallSuccessAlert("success", 700, false);
-    } catch (err: any) {
-      console.log("targetLikeTop, ERROR:", err);
-      sweetErrorHandling(err).then();
-    }
-  };
+    };
 
   return (
     <div className="all_restaurant">
@@ -156,7 +162,7 @@ export function AllRestaurants() {
                 <Button
                   className={"button_search"}
                   variant="contained"
-                  endIcon={<SearchIcon />}
+                  endIcon={<Search />}
                 ></Button>
               </form>
             </Box>
@@ -217,7 +223,7 @@ export function AllRestaurants() {
                     <Typography level="body-sm" sx={{ mt: 0.5, mb: 2 }}>
                       <Link
                         href=""
-                        startDecorator={<LocationOnRoundedIcon />}
+                        startDecorator={<LocationOnRounded />}
                         textColor="neutral.700"
                       >
                         {ele.mb_address}
@@ -225,10 +231,7 @@ export function AllRestaurants() {
                       </Link>
                     </Typography>
                     <Typography level="body-sm" sx={{ mt: 0.5, mb: 2 }}>
-                      <Link
-                        startDecorator={<CallIcon />}
-                        textColor={"neutral.700"}
-                      >
+                      <Link startDecorator={<Call />} textColor={"neutral.700"}>
                         {ele.mb_phone}
                       </Link>
                     </Typography>
@@ -254,9 +257,7 @@ export function AllRestaurants() {
                         }}
                       >
                         {ele.mb_views}
-                        <VisibilityIcon
-                          sx={{ fontSize: 20, marginLeft: "5px" }}
-                        />
+                        <Visibility sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                       <Box sx={{ width: 2, bgcolor: "divider" }} />
                       <Typography
@@ -292,8 +293,8 @@ export function AllRestaurants() {
               renderItem={(item) => (
                 <PaginationItem
                   components={{
-                    previous: ArrowBackIcon,
-                    next: ArrowForwardIcon,
+                    previous: ArrowBack,
+                    next: ArrowForward,
                   }}
                   {...item}
                   color={"secondary"}

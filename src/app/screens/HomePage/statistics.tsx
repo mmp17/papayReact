@@ -1,5 +1,6 @@
-import React from "react";
+// Material UI Component Imports
 import { Box, Container, Stack } from "@mui/material";
+// Custom Component Import
 import Marginer from "../../components/marginer";
 
 export function Statistics() {

@@ -39,10 +39,12 @@ class CommunityApiServer {
     }
   }
 
-  async chosenMemberCommunityArticles(data: SearchMemberArticlesObj) {
+  async chosenMemberCommunityArticles(
+    data: SearchMemberArticlesObj
+  ): Promise<BoArticle[]> {
     try {
-      const url = `${this.path}/community/articles?mb_id=${data.mb_id}&page=${data.page}&limit=${data.limit}`;
-      const result = await axios.get(url, { withCredentials: true });
+      const url = `${this.path}/community/articles?mb_id=${data.mb_id}&page=${data.page}&limit=${data.limit}`,
+        result = await axios.get(url, { withCredentials: true });
       console.log("chosenMemberCommunityArticles state::", result.data.state);
       assert.ok(result?.data, Definer.general_err1);
       assert.ok(result?.data?.data, result?.data.message);
@@ -54,10 +56,10 @@ class CommunityApiServer {
     }
   }
 
-  async chosenSingleBoArticle(id: string) {
+  async chosenSingleBoArticle(id: string): Promise<BoArticle> {
     try {
-      const url = `${this.path}/community/single-article/${id}`;
-      const result = await axios.get(url, { withCredentials: true });
+      const url = `${this.path}/community/single-article/${id}`,
+        result = await axios.get(url, { withCredentials: true });
       console.log("chosenSingleBoArticle state::", result.data.state);
       assert.ok(result?.data, Definer.general_err1);
       assert.ok(result?.data?.data, result?.data.message);

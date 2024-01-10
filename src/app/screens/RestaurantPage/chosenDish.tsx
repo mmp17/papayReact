@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { Box, Button, Container, Rating, Stack } from "@mui/material";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+// React Core Import
+import { useEffect, useState } from "react";
+// React Router Import
+import { useParams } from "react-router-dom";
+// Material UI Component and Icon Imports
+import { Box, Button, Container, Rating, Stack, Checkbox } from "@mui/material";
+import { Favorite, FavoriteBorder, RemoveRedEye } from "@mui/icons-material";
+// Swiper Imports
 import { Swiper, SwiperSlide } from "swiper/react";
-import CheckBox from "@mui/material/Checkbox";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import Marginer from "../../components/marginer";
+import { FreeMode, Navigation, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { useParams } from "react-router-dom";
-import { Product } from "../../../types/product";
-import { Restaurant } from "../../../types/user";
+// Local Component Import
+import Marginer from "../../components/marginer";
+// Redux Imports
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import { Dispatch } from "@reduxjs/toolkit";
 import {
   retrieveChosenProduct,
   retrieveChosenRestaurant,
 } from "../../screens/RestaurantPage/selector";
-import { Dispatch } from "@reduxjs/toolkit";
 import {
   setChosenProduct,
   setChosenRestaurant,
 } from "../../screens/RestaurantPage/slice";
+// API Server Imports
 import ProductApiServer from "../../apiServer/productApiServer";
 import RestaurantApiServer from "../../apiServer/restaurantApiServer";
 import MemberApiServer from "../../apiServer/memberApiServer";
+// Utility and Configuration Imports
 import { serverApi } from "../../../lib/config";
 import assert from "assert";
 import { Definer } from "../../../lib/Definer";
@@ -35,15 +39,18 @@ import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
+// Type Imports
+import { Product } from "../../../types/product";
+import { Restaurant } from "../../../types/user";
 
-// REDUX SLICE
+// Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
   setChosenRestaurant: (data: Restaurant[]) =>
     dispatch(setChosenRestaurant(data)),
 });
 
-// REDUX SELECTOR
+// Redux Selector
 const chosenProductRetriever = createSelector(
   retrieveChosenProduct,
   (chosenProduct) => ({
@@ -61,33 +68,33 @@ const chosenRestaurantRetriever = createSelector(
 // const chosen_list = Array.from(Array(3).keys());
 
 export function ChosenDish(props: any) {
-  // INITIALIZATIONS
+  // Initializations
   let { dish_id } = useParams<{ dish_id: string }>();
   const { setChosenProduct, setChosenRestaurant } = actionDispatch(
-    useDispatch()
-  );
-  const { chosenProduct } = useSelector(chosenProductRetriever);
-  const { chosenRestaurant } = useSelector(chosenRestaurantRetriever);
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
-  const [productRebuild, setProductRebuild] = useState<Date>(new Date());
+      useDispatch()
+    ),
+    { chosenProduct } = useSelector(chosenProductRetriever),
+    { chosenRestaurant } = useSelector(chosenRestaurantRetriever),
+    label = { inputProps: { "aria-label": "Checkbox demo" } },
+    [productRebuild, setProductRebuild] = useState<Date>(new Date());
 
   const dishRelatedProcess = async () => {
     try {
-      const productService = new ProductApiServer();
-      const product: Product = await productService.getChosenDish(dish_id);
+      const productService = new ProductApiServer(),
+        product: Product = await productService.getChosenDish(dish_id);
       setChosenProduct(product);
 
-      const restaurantService = new RestaurantApiServer();
-      const restaurant = await restaurantService.getChosenRestaurant(
-        product.restaurant_mb_id
-      );
+      const restaurantService = new RestaurantApiServer(),
+        restaurant = await restaurantService.getChosenRestaurant(
+          product.restaurant_mb_id
+        );
       setChosenRestaurant(restaurant);
     } catch (err) {
       console.log(`dishRelatedProcess ERROR:`, err);
     }
   };
 
-  /** HANDLERS */
+  //  Handlers
   const targetLikeProduct = async (e: any) => {
     try {
       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
@@ -194,7 +201,7 @@ export function ChosenDish(props: any) {
                     marginRight: "20px",
                   }}
                 >
-                  <CheckBox
+                  <Checkbox
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite style={{ color: "red" }} />}
                     id={chosenProduct?._id}
@@ -208,7 +215,7 @@ export function ChosenDish(props: any) {
                   <span>{chosenProduct?.product_likes}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <RemoveRedEyeIcon sx={{ mr: "10px" }} />
+                  <RemoveRedEye sx={{ mr: "10px" }} />
                   <span>{chosenProduct?.product_views}</span>
                 </div>
               </div>

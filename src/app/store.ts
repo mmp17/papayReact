@@ -1,6 +1,9 @@
+// Redux Toolkit Import
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import HomePageReducer from "./screens/HomePage/slice";
+// Redux Middleware Import
 import reduxLogger from "redux-logger";
+// Reducer Imports
+import HomePageReducer from "./screens/HomePage/slice";
 import RestaurantPageReducer from "./screens/RestaurantPage/slice";
 import OrdersPageReducer from "./screens/OrdersPage/slice";
 import CommunityPageReducer from "./screens/CommunityPage/slice";

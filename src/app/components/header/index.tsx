@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+// React Router Import
+import { NavLink } from "react-router-dom";
+// Material UI Component and Icon Imports
 import {
-  Badge,
   Box,
   Button,
-  Icon,
-  IconButton,
-  ListItem,
   ListItemIcon,
   Menu,
   MenuItem,
   Stack,
+  Container,
 } from "@mui/material";
-import { Container } from "@mui/system";
-import { NavLink } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
+// Local Component Import
 import Basket from "./basket";
 
 export function NavbarHome(props: any) {

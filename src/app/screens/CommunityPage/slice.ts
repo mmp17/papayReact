@@ -1,6 +1,7 @@
+// Redux Toolkit Import
 import { createSlice } from "@reduxjs/toolkit";
+// Type Import
 import { CommunityPageState } from "../../../types/screen";
-import { CommunityPage } from ".";
 
 const initialState: CommunityPageState = {
   targetBoArticles: [],

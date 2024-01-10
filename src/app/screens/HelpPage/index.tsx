@@ -1,17 +1,24 @@
-import { Box, Container, Stack } from "@mui/material";
+// React Import
 import React from "react";
-import "../../../css/help.css";
+// Material UI Component Imports
+import {
+  Box,
+  Container,
+  Stack,
+  Button,
+  Typography,
+  Tab,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+// Material UI Lab and Icon Imports
 import TabContext from "@mui/lab/TabContext";
-import Tab from "@mui/material/Tab";
-import Tablist from "@mui/lab/TabList";
+import TabList from "@mui/lab/TabList"; // Note: 'Tablist' and 'TabList' seem to be a duplicate, keeping 'TabList'
 import TabPanel from "@mui/lab/TabPanel";
-import TabList from "@mui/lab/TabList";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// CSS Import
+import "../../../css/help.css";
 
 export function HelpPage() {
   // Initializations

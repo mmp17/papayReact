@@ -1,23 +1,30 @@
-import { Box, Container, Stack } from "@mui/material";
+// React Import
 import React, { useRef } from "react";
+// React Router Import
+import { useHistory } from "react-router-dom";
+// External Library Import
+import assert from "assert";
+
+// Material UI Component Imports
+import { Box, Container, Stack } from "@mui/material";
+import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import CallIcon from "@mui/icons-material/Call";
+import { Favorite } from "@mui/icons-material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+// Material UI Joy Component Imports
 import Card from "@mui/joy/Card";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import CallIcon from "@mui/icons-material/Call";
-import { CssVarsProvider } from "@mui/joy/styles";
 import { CardOverflow, IconButton } from "@mui/joy";
-import { Favorite, RefreshSharp, Visibility } from "@mui/icons-material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import assert from "assert";
+import { CssVarsProvider } from "@mui/joy/styles";
+// Utility and API Server Imports
 import { Definer } from "../../../lib/Definer";
 import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import MemberApiService from "../../apiServer/memberApiServer";
-import { useHistory } from "react-router-dom";
 
 //Redux
 import { useSelector } from "react-redux";

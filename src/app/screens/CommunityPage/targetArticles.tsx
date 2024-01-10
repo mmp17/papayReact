@@ -1,17 +1,21 @@
+// External Library Imports
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+// Material UI Component and Icon Imports
 import { Box, Checkbox, Link, Stack } from "@mui/material";
-import { Favorite, RemoveRedEye } from "@mui/icons-material";
+import { Favorite } from "@mui/icons-material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { BoArticle } from "../../../types/boArticle";
+// Utility and API Server Imports
 import { serverApi } from "../../../lib/config";
 import moment from "moment";
 import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
-import assert from "assert";
-import { Definer } from "../../../lib/Definer";
 import MemberApiServer from "../../apiServer/memberApiServer";
+// Type Import
+import { BoArticle } from "../../../types/boArticle";
 
 export function TargetArticles(props: any) {
   // Handlers
@@ -19,11 +23,11 @@ export function TargetArticles(props: any) {
     try {
       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
 
-      const memberService = new MemberApiServer();
-      const like_result = await memberService.memberLikeTarget({
-        like_ref_id: e.target.id,
-        group_type: "community",
-      });
+      const memberService = new MemberApiServer(),
+        like_result = await memberService.memberLikeTarget({
+          like_ref_id: e.target.id,
+          group_type: "community",
+        });
       assert.ok(like_result, Definer.general_err1);
       await sweetTopSmallSuccessAlert("success", 700, false);
       props.setArticlesRebuild(new Date());
@@ -36,11 +40,11 @@ export function TargetArticles(props: any) {
     <Stack>
       {props.targetBoArticles?.map((article: BoArticle) => {
         const art_image_url = article?.art_image
-          ? `${serverApi}/${article.art_image}`
-          : "/auth/default_article.svg";
-        const image_path = article?.member_data.mb_image
-          ? `${serverApi}/${article.member_data.mb_image}`
-          : "/auth/default_user.png";
+            ? `${serverApi}/${article.art_image}`
+            : "/auth/default_article.svg",
+          image_path = article?.member_data.mb_image
+            ? `${serverApi}/${article.member_data.mb_image}`
+            : "/auth/default_user.png";
         return (
           <Link
             className={"all_article_box"}
