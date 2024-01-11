@@ -29,3 +29,10 @@ export interface SearchMemberArticlesObj {
   page: number;
   limit: number;
 }
+
+export interface BoArticleInput {
+  bo_id: string;
+  art_subject: string;
+  art_content: string;
+  art_image: string;
+}

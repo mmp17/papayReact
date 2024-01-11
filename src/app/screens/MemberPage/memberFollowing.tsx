@@ -1,5 +1,6 @@
 // React
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import assert from "assert";
 // Material UI Components
 import { Box, Button, Pagination, PaginationItem, Stack } from "@mui/material";
@@ -33,15 +34,11 @@ const memberFollowingsRetriever = createSelector(
     memberFollowings,
   })
 );
-const followings = [
-  { mb_nick: "Ahmad" },
-  { mb_nick: "Joseph" },
-  { mb_nick: "Adam" },
-];
 
 export function MemberFollowing(props: any) {
   // Initializations
   const { actions_enabled, mb_id, followRebuild, setFollowRebuild } = props,
+    history = useHistory(),
     { setMemberFollowings } = actionDispatch(useDispatch()),
     { memberFollowings } = useSelector(memberFollowingsRetriever),
     [followingSearchObj, setFollowingSearchObj] = useState<FollowSearchObj>({
@@ -66,7 +63,7 @@ export function MemberFollowing(props: any) {
       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
       const followService = new FollowApiServer();
       await followService.unsubscribe(id);
-      sweetTopSmallSuccessAlert("success", 700, false);
+      sweetTopSmallSuccessAlert("unsubscribed successfully", 700, false);
       setFollowRebuild(new Date());
     } catch (err: any) {
       sweetErrorHandling(err);
@@ -76,6 +73,10 @@ export function MemberFollowing(props: any) {
     followingSearchObj.page = newValue;
     setFollowingSearchObj({ ...followingSearchObj });
   };
+  const visitMemberHandler = (mb_id: string) => {
+    history.push(`/member-page/other?mb_id=${mb_id}`);
+    document.location.reload();
+  };
   return (
     <Stack>
       {memberFollowings.map((following: Following) => {
@@ -84,7 +85,11 @@ export function MemberFollowing(props: any) {
           : "auth/default_user.png";
         return (
           <Stack className={"following_list"}>
-            <div className={"member_img"}>
+            <div
+              className={"member_img"}
+              style={{ cursor: "pointer" }}
+              onClick={() => visitMemberHandler(following?.follow_id)}
+            >
               <img alt="image" className={"member_avatar"} src={image_url} />
             </div>
             <Box
@@ -99,7 +104,11 @@ export function MemberFollowing(props: any) {
               <span className={"username_text"}>
                 {following.follow_member_data.mb_type}
               </span>
-              <span className={"name_text"}>
+              <span
+                className={"name_text"}
+                style={{ cursor: "pointer" }}
+                onClick={() => visitMemberHandler(following?.follow_id)}
+              >
                 {following.follow_member_data.mb_nick}
               </span>
             </Box>

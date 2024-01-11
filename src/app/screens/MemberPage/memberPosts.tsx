@@ -43,9 +43,9 @@ export function MemberPosts(props: any) {
 
   return (
     <Box className="post_content">
-      {chosenMemberBoArticles.map((article: BoArticle) => {
+      {chosenMemberBoArticles?.map((article: BoArticle) => {
         const image_path = article.art_image
-          ? `${serverApi}/${article.art_image}`
+          ? `${serverApi}/${article.art_image.replace(/\\/g, "/")}`
           : "/auth/default_article.svg";
         console.log(image_path);
         return (
@@ -65,7 +65,7 @@ export function MemberPosts(props: any) {
                 <Box alignItems={"center"} display={"flex"}>
                   <img
                     src={
-                      article.member_data.mb_image
+                      article?.member_data?.mb_image
                         ? `${serverApi}/${article.member_data.mb_image}`
                         : "/auth/default_user.png"
                     }
@@ -87,7 +87,7 @@ export function MemberPosts(props: any) {
                 >
                   <span className={"all_article_title"}>{article?.bo_id}</span>
                   <span className={"all_article_desc"}>
-                    {article?.art_content}
+                    {article?.art_subject}
                   </span>
                 </Box>
                 <Box>

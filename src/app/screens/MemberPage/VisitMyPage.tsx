@@ -98,7 +98,7 @@ export function VisitMyPage(props: any) {
       {
         mb_id: "none",
         page: 1,
-        limit: 5,
+        limit: 4,
       }
     ),
     [rebuildArticle, setArticleRebuild] = useState<Date>(new Date()),
@@ -212,24 +212,7 @@ export function VisitMyPage(props: any) {
                       direction="row"
                       alignItems={"center"}
                       justifyContent="center"
-                    >
-                      {/* <Box className={"bottom_box"}>
-                        <Pagination
-                          count={5}
-                          page={1}
-                          renderItem={(item) => (
-                            <PaginationItem
-                              components={{
-                                previous: ArrowBack,
-                                next: ArrowForward,
-                              }}
-                              {...item}
-                              color={"secondary"}
-                            />
-                          )}
-                        />
-                      </Box> */}
-                    </Stack>
+                    ></Stack>
                   </Box>
                 </TabPanel>
 
@@ -254,7 +237,10 @@ export function VisitMyPage(props: any) {
                 <TabPanel value={"4"}>
                   <Box className={"menu_name"}>Write article</Box>
                   <Box className={"write_content"}>
-                    <TuiEditor />
+                    <TuiEditor
+                      setValue={setValue}
+                      setArticlesRebuild={setArticleRebuild}
+                    />
                   </Box>
                 </TabPanel>
 
@@ -357,6 +343,8 @@ export function VisitMyPage(props: any) {
               </Box>
               <Box className={"my_page_menu"}>
                 <TabList
+                  orientation="vertical"
+                  variant="scrollable"
                   onChange={handleChange}
                   aria-label="lab API tabs example"
                   style={{
@@ -368,7 +356,7 @@ export function VisitMyPage(props: any) {
                     value={"1"}
                     component={() => (
                       <div
-                        className={`menu_box ${value}`}
+                        className={`menu_box `}
                         onClick={() => setValue("1")}
                       >
                         <img src="/icons/pencil.svg" />
@@ -379,28 +367,28 @@ export function VisitMyPage(props: any) {
 
                   <Tab
                     style={{ flexDirection: "column" }}
-                    value={"1"}
+                    value={"2"}
                     component={() => (
                       <div
-                        className={`menu_box ${value}`}
+                        className={`menu_box `}
                         onClick={() => setValue("2")}
                       >
                         <img src="/icons/followers.svg" />
-                        <span>Followers</span>
+                        <span>My Followers</span>
                       </div>
                     )}
                   />
 
                   <Tab
                     style={{ flexDirection: "column" }}
-                    value={"1"}
+                    value={"3"}
                     component={() => (
                       <div
-                        className={`menu_box ${value}`}
+                        className={`menu_box `}
                         onClick={() => setValue("3")}
                       >
                         <img src="/icons/following.svg" />
-                        <span>Following</span>
+                        <span>My Followings</span>
                       </div>
                     )}
                   />
