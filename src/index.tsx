@@ -1,5 +1,6 @@
 // React Core and DOM Imports
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 // Redux Imports
 import { Provider } from "react-redux"; //to make the Redux store available to the rest of the app.
@@ -21,10 +22,12 @@ root.render(
   // is the method that initializes the rendering of App component into the root DOM node.
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </Router>
     </Provider>
   </React.StrictMode>
 );

@@ -1,7 +1,11 @@
 // React and React Router Imports
 import React, { useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 // CSS Imports
 import "../css/App.css";
 import "../css/navbar.css";
@@ -41,109 +45,99 @@ function App() {
   const [verifiedMemberData, setverifiedMemberData] = useState<Member | null>(
     null
   );
-  const [path, setPath] = useState();
-  // const location = useLocation();
-  const main_path = window.location.pathname;
-  const [signUpOpen, setSignUpOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const cartJson: any = localStorage.getItem("cart_data");
-  const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
-  const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
+  const { pathname } = useLocation(),
+    [signUpOpen, setSignUpOpen] = useState(false),
+    [loginOpen, setLoginOpen] = useState(false),
+    [orderRebuild, setOrderRebuild] = useState<Date>(new Date()),
+    [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null),
+    open = Boolean(anchorEl),
+    cartJson: any = localStorage.getItem("cart_data"),
+    current_cart: CartItem[] = JSON.parse(cartJson) ?? [],
+    [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
 
   /**  Handlers */
-  const handleSignupOpen = () => setSignUpOpen(true);
-  const handleSignupClose = () => setSignUpOpen(false);
-  const handleLoginOpen = () => setLoginOpen(true);
-  const handleLoginClose = () => setLoginOpen(false);
-  const handleLogoutClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseLogOut = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(null);
-  };
-
-  const handleLogOutRequest = async () => {
-    try {
-      const memberApiService = new MemberApiService();
-      await memberApiService.logOutRequest();
-      await sweetTopSmallSuccessAlert("success", 500, true);
-    } catch (err: any) {
-      console.log(err);
-      sweetFailureProvider(Definer.general_err1);
-    }
-  };
-
-  const onAdd = (product: Product) => {
-    console.log("product:", product);
-    const exist: any = cartItems.find(
-      (item: CartItem) => item._id === product._id
-    );
-    if (exist) {
-      const cart_updated = cartItems.map((item: CartItem) =>
-        item._id === product._id
-          ? { ...exist, quantity: exist.quantity + 1 }
-          : item
+  const handleSignupOpen = () => setSignUpOpen(true),
+    handleSignupClose = () => setSignUpOpen(false),
+    handleLoginOpen = () => setLoginOpen(true),
+    handleLoginClose = () => setLoginOpen(false),
+    handleLogoutClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    },
+    handleCloseLogOut = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(null);
+    },
+    handleLogOutRequest = async () => {
+      try {
+        const memberApiService = new MemberApiService();
+        await memberApiService.logOutRequest();
+        await sweetTopSmallSuccessAlert("success", 500, true);
+      } catch (err: any) {
+        console.log(err);
+        sweetFailureProvider(Definer.general_err1);
+      }
+    },
+    onAdd = (product: Product) => {
+      console.log("product:", product);
+      const exist: any = cartItems.find(
+        (item: CartItem) => item._id === product._id
       );
-      setCartItems(cart_updated);
-      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-    } else {
-      const new_item: CartItem = {
-        _id: product._id,
-        quantity: 1,
-        name: product.product_name,
-        price: product.product_price,
-        image: product.product_images[0],
-      };
-      const cart_updated = [...cartItems, { ...new_item }];
-      setCartItems(cart_updated);
-      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-    }
-  };
-
-  const onRemove = (item: CartItem) => {
-    const item_data: any = cartItems.find(
-      (ele: CartItem) => ele._id === item._id
-    );
-    if (item_data.quantity === 1) {
+      if (exist) {
+        const cart_updated = cartItems.map((item: CartItem) =>
+          item._id === product._id
+            ? { ...exist, quantity: exist.quantity + 1 }
+            : item
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      } else {
+        const new_item: CartItem = {
+          _id: product._id,
+          quantity: 1,
+          name: product.product_name,
+          price: product.product_price,
+          image: product.product_images[0],
+        };
+        const cart_updated = [...cartItems, { ...new_item }];
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      }
+    },
+    onRemove = (item: CartItem) => {
+      const item_data: any = cartItems.find(
+        (ele: CartItem) => ele._id === item._id
+      );
+      if (item_data.quantity === 1) {
+        const cart_updated = cartItems.filter(
+          (ele: CartItem) => ele._id !== item._id
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      } else {
+        const cart_updated = cartItems.map((ele: CartItem) =>
+          ele._id === item._id
+            ? { ...item_data, quantity: item_data.quantity - 1 }
+            : ele
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      }
+    },
+    onDelete = (item: CartItem) => {
       const cart_updated = cartItems.filter(
         (ele: CartItem) => ele._id !== item._id
       );
       setCartItems(cart_updated);
       localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-    } else {
-      const cart_updated = cartItems.map((ele: CartItem) =>
-        ele._id === item._id
-          ? { ...item_data, quantity: item_data.quantity - 1 }
-          : ele
-      );
-      setCartItems(cart_updated);
-      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-    }
-  };
-
-  const onDelete = (item: CartItem) => {
-    const cart_updated = cartItems.filter(
-      (ele: CartItem) => ele._id !== item._id
-    );
-    setCartItems(cart_updated);
-    localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-  };
-
-  const onDeleteAll = () => {
-    setCartItems([]);
-    localStorage.removeItem("cart_data");
-  };
+    },
+    onDeleteAll = () => {
+      setCartItems([]);
+      localStorage.removeItem("cart_data");
+    };
 
   return (
-    <Router>
-      {main_path === "/" ? (
+    <div>
+      {pathname === "/" ? (
         <NavbarHome
-          setPath={setPath}
           handleLoginOpen={handleLoginOpen}
           handleSignupOpen={handleSignupOpen}
           anchorEl={anchorEl}
@@ -159,9 +153,8 @@ function App() {
           onDeleteAll={onDeleteAll}
           setOrderRebuild={setOrderRebuild}
         />
-      ) : main_path.includes("/restaurant") ? (
+      ) : pathname.includes("/restaurant") ? (
         <NavbarRestaurant
-          setPath={setPath}
           handleLoginOpen={handleLoginOpen}
           anchorEl={anchorEl}
           open={open}
@@ -178,7 +171,6 @@ function App() {
         />
       ) : (
         <NavbarOthers
-          setPath={setPath}
           handleLoginOpen={handleLoginOpen}
           anchorEl={anchorEl}
           open={open}
@@ -232,7 +224,7 @@ function App() {
         handleSignupOpen={handleSignupOpen}
         handleSignupClose={handleSignupClose}
       />
-    </Router>
+    </div>
   );
 }
 

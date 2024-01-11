@@ -33,34 +33,34 @@ export function NavbarRestaurant(props: any) {
             alignItems={"center"}
             className="navbar_links"
           >
-            <Box className="hover-line" onClick={props.setPath}>
+            <Box className="hover-line">
               <NavLink to="/">Home</NavLink>
             </Box>
-            <Box className="hover-line" onClick={props.setPath}>
+            <Box className="hover-line">
               <NavLink to="/restaurant" activeClassName="underline">
                 Restaurants
               </NavLink>
             </Box>
             {verifiedMemberData ? (
-              <Box className="hover-line" onClick={props.setPath}>
+              <Box className="hover-line">
                 <NavLink to="/orders" activeClassName="underline">
                   Orders
                 </NavLink>
               </Box>
             ) : null}
-            <Box className="hover-line" onClick={props.setPath}>
+            <Box className="hover-line">
               <NavLink to="/community" activeClassName="underline">
                 Community
               </NavLink>
             </Box>
             {verifiedMemberData ? (
-              <Box className="hover-line" onClick={props.setPath}>
+              <Box className="hover-line">
                 <NavLink to="/member-page" activeClassName="underline">
                   My Page
                 </NavLink>
               </Box>
             ) : null}
-            <Box className="hover-line" onClick={props.setPath}>
+            <Box className="hover-line">
               <NavLink to="/help" activeClassName="underline">
                 Help
               </NavLink>
