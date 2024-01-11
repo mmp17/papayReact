@@ -10,11 +10,12 @@ import Badge from "@mui/material/Badge";
 import Menu from "@mui/material/Menu";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// Utility and API Server Imports:
+// Utility and API Server Imports
 import { serverApi } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { Definer } from "../../../lib/Definer";
 import OrderApiServer from "../../apiServer/orderApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Import
 import { CartItem } from "../../../types/others";
 
@@ -43,7 +44,7 @@ export default function Basket(props: any) {
 
   const processOrderHandler = async () => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
       const order = new OrderApiServer();
       await order.createOrder(cartItems);
 

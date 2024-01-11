@@ -48,6 +48,7 @@ import MemberApiServer from "../../apiServer/memberApiServer";
 import assert from "assert";
 import { Definer } from "../../../lib/Definer";
 import { serverApi } from "../../../lib/config";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Imports
 import { Restaurant } from "../../../types/user";
 import { SearchObj } from "../../../types/others";
@@ -108,7 +109,7 @@ export function AllRestaurants() {
     },
     targetLikeHandler = async (e: any, id: string) => {
       try {
-        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+        assert.ok(verifiedMemberData, Definer.auth_err1);
         // The like functionality checks for member data in local storage to ensure user authentication.
         const memberService = new MemberApiServer(),
           like_result = await memberService.memberLikeTarget({

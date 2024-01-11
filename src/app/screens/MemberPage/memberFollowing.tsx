@@ -11,15 +11,17 @@ import { createSelector } from "reselect";
 import { Dispatch } from "@reduxjs/toolkit";
 import { retrieveMemberFollowings } from "../../screens/MemberPage/selector";
 import { setMemberFollowings } from "../../screens/MemberPage/slice";
-// Type Imports
-import { FollowSearchObj, Following } from "../../../types/follow";
+// Utility and API Server Imports
 import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import FollowApiServer from "../../apiServer/followApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 import { serverApi } from "../../../lib/config";
 import { Definer } from "../../../lib/Definer";
+// Type Imports
+import { FollowSearchObj, Following } from "../../../types/follow";
 
 // Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -60,7 +62,7 @@ export function MemberFollowing(props: any) {
   const unsubscribeHandler = async (e: any, id: string) => {
     try {
       e.stopPropagation();
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
       const followService = new FollowApiServer();
       await followService.unsubscribe(id);
       sweetTopSmallSuccessAlert("unsubscribed successfully", 700, false);

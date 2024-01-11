@@ -21,6 +21,7 @@ import {
 import FollowApiServer from "../../apiServer/followApiServer";
 import { serverApi } from "../../../lib/config";
 import { Definer } from "../../../lib/Definer";
+import { verifiedMemberData } from "../../apiServer/verify";
 
 // Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -49,7 +50,7 @@ export function MemberFollowers(props: any) {
 
   //Hooks
   useEffect(() => {
-    assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+    assert.ok(verifiedMemberData, Definer.auth_err1);
     const followService = new FollowApiServer();
     followService
       .getMemberFollowers(followerSearchObj)
@@ -60,7 +61,7 @@ export function MemberFollowers(props: any) {
   const subscribeHandler = async (e: any, id: string) => {
     try {
       e.stopPropagation();
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
       const followService = new FollowApiServer();
       await followService.subscribe(id);
       sweetTopSmallSuccessAlert("subscribed successfully", 700, false);

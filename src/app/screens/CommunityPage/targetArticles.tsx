@@ -14,6 +14,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import MemberApiServer from "../../apiServer/memberApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Import
 import { BoArticle } from "../../../types/boArticle";
 
@@ -21,7 +22,7 @@ export function TargetArticles(props: any) {
   // Handlers
   const targetLikeHandler = async (e: any) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const memberService = new MemberApiServer(),
         like_result = await memberService.memberLikeTarget({

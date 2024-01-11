@@ -13,6 +13,8 @@ import {
 import { Logout } from "@mui/icons-material";
 // Local Component Import
 import Basket from "./basket";
+// Utility and API Server Imports
+import { verifiedMemberData } from "../../apiServer/verify";
 
 export function NavbarHome(props: any) {
   // Initializations
@@ -43,7 +45,7 @@ export function NavbarHome(props: any) {
                 Restaurants
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
               <Box className="hover-line" onClick={props.setPath}>
                 <NavLink to="/orders" activeClassName="underline">
                   Orders
@@ -55,7 +57,7 @@ export function NavbarHome(props: any) {
                 Community
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
               <Box className="hover-line" onClick={props.setPath}>
                 <NavLink to="/member-page" activeClassName="underline">
                   My Page
@@ -75,7 +77,7 @@ export function NavbarHome(props: any) {
               onDeleteAll={props.onDeleteAll}
               setOrderRebuild={props.setOrderRebuild}
             />
-            {!props.verifiedMemberData ? (
+            {!verifiedMemberData ? (
               <Box>
                 <Button
                   variant="contained"
@@ -88,7 +90,7 @@ export function NavbarHome(props: any) {
             ) : (
               <img
                 style={{ width: "48px", height: "48px", borderRadius: "24px" }}
-                src={props.verifiedMemberData.mb_image}
+                src={verifiedMemberData.mb_image}
                 onClick={props.handleLogoutClick}
               />
             )}
@@ -158,7 +160,7 @@ export function NavbarHome(props: any) {
               local restaurants directly to your doorstep.{" "}
             </Box>
             <Box sx={{ mt: "90px" }}>
-              {!props.verifiedMemberData ? ( // login buganda signup button yoqoladi
+              {!verifiedMemberData ? ( // login buganda signup button yoqoladi
                 <Button
                   variant="contained"
                   style={{

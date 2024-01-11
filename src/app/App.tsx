@@ -1,5 +1,5 @@
 // React and React Router Imports
-import React, { useEffect, useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
+import React, { useState } from "react"; // imports the React library, which is necessary to use React components and JSX.
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 // CSS Imports
@@ -54,20 +54,6 @@ function App() {
   const cartJson: any = localStorage.getItem("cart_data");
   const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
   const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
-
-  useEffect(() => {
-    console.log("==== useEffect: App ====");
-    const memberDataJson: any = localStorage.getItem("member_data")
-      ? localStorage.getItem("member_data")
-      : null;
-    const member_data = memberDataJson ? JSON.parse(memberDataJson) : null; // convers to object
-    if (member_data) {
-      member_data.mb_image = member_data.mb_image
-        ? `${serverApi}/${member_data.mb_image}`
-        : "/auth/default_user.png";
-      setverifiedMemberData(member_data);
-    }
-  }, [signUpOpen, loginOpen]); // rerenders if eithere changes in array
 
   /**  Handlers */
   const handleSignupOpen = () => setSignUpOpen(true);

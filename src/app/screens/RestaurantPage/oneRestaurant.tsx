@@ -43,6 +43,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { serverApi } from "../../../lib/config";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Imports
 import { Product } from "../../../types/product";
 import { ProductSearchObj } from "../../../types/others";
@@ -142,7 +143,7 @@ export function OneRestaurant(props: any) {
 
   const targetLikeProduct = async (e: any) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const memberService = new MemberApiServer(),
         like_result: any = await memberService.memberLikeTarget({

@@ -15,6 +15,7 @@ import "../../../css/orders.css";
 import PausedOrders from "../../components/orders/pausedOrders";
 import ProcessOrders from "../../components/orders/processOrders";
 import FinishedOrders from "../../components/orders/finishedOrders";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Imports
 import { Order } from "../../../types/order";
 import { Member } from "../../../types/user";
@@ -40,8 +41,7 @@ export function OrdersPage(props: any) {
   // Initializations
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
       actionDispatch(useDispatch()),
-    [value, setValue] = useState("1"),
-    verifiedMemberData: Member | null = props.verifiedMemberData;
+    [value, setValue] = useState("1");
 
   useEffect(() => {
     const orderServer = new OrderApiServer();

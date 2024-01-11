@@ -28,6 +28,7 @@ import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
+import { verifiedMemberData } from "../../apiServer/verify";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -57,7 +58,7 @@ export function BestRestaurants() {
     goRestaurantHandler = () => history.push("/restaurant"),
     targetLikeBest = async (e: any, id: string) => {
       try {
-        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+        assert.ok(verifiedMemberData, Definer.auth_err1);
 
         const memberService = new MemberApiService(),
           like_result: any = await memberService.memberLikeTarget({

@@ -15,6 +15,7 @@ import {
 import { Definer } from "../../../lib/Definer";
 // API Server Import
 import MemberApiServer from "../../apiServer/memberApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 
 export function MemberPosts(props: any) {
   //Initializations
@@ -27,7 +28,7 @@ export function MemberPosts(props: any) {
   const targetArticleLikeHandler = async (e: any) => {
     try {
       e.stopPropagation();
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
       const memberService = new MemberApiServer(),
         like_result = await memberService.memberLikeTarget({
           like_ref_id: e.target.value,

@@ -13,6 +13,7 @@ import {
 import { Logout } from "@mui/icons-material";
 // Local Component Import
 import Basket from "./basket";
+import { verifiedMemberData } from "../../apiServer/verify";
 
 export function NavbarRestaurant(props: any) {
   return (
@@ -40,7 +41,7 @@ export function NavbarRestaurant(props: any) {
                 Restaurants
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
               <Box className="hover-line" onClick={props.setPath}>
                 <NavLink to="/orders" activeClassName="underline">
                   Orders
@@ -52,7 +53,7 @@ export function NavbarRestaurant(props: any) {
                 Community
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
               <Box className="hover-line" onClick={props.setPath}>
                 <NavLink to="/member-page" activeClassName="underline">
                   My Page
@@ -72,7 +73,7 @@ export function NavbarRestaurant(props: any) {
               onDeleteAll={props.onDeleteAll}
               setOrderRebuild={props.setOrderRebuild}
             />
-            {!props.verifiedMemberData ? (
+            {!verifiedMemberData ? (
               <Box>
                 <Button
                   variant="contained"
@@ -85,7 +86,7 @@ export function NavbarRestaurant(props: any) {
             ) : (
               <img
                 style={{ width: "48px", height: "48px", borderRadius: "24px" }}
-                src={props.verifiedMemberData.mb_image}
+                src={verifiedMemberData.mb_image}
                 onClick={props.handleLogoutClick}
               />
             )}

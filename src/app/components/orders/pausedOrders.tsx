@@ -12,6 +12,7 @@ import {
   sweetFailureProvider,
 } from "../../../lib/sweetAlert";
 import OrderApiServer from "../../apiServer/orderApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Imports
 import { Order } from "../../../types/order";
 import { Product } from "../../../types/product";
@@ -34,7 +35,7 @@ export default function PausedOrders(props: any) {
       const order_id = event.target.value,
         data = { order_id: order_id, order_status: "DELETED" };
 
-      if (!localStorage.getItem("member_data")) {
+      if (!verifiedMemberData) {
         sweetFailureProvider("Please login first", true);
       }
 
@@ -55,7 +56,7 @@ export default function PausedOrders(props: any) {
       const order_id = event.target.value,
         data = { order_id: order_id, order_status: "PROCESS" };
 
-      if (!localStorage.getItem("member_data")) {
+      if (!verifiedMemberData) {
         sweetFailureProvider("Please login first", true);
       }
 
@@ -80,7 +81,7 @@ export default function PausedOrders(props: any) {
             <Box className={"order_main_box"}>
               <Box className={"order_box_scroll"}>
                 {order.order_items.map((item) => {
-                  const product: Product = order.product_data.filter(
+                  const product: Product = order.product_data?.filter(
                     (ele) => ele._id === item.product_id
                   )[0];
                   const image_path = `${serverApi}/${product.product_images[0]}`;

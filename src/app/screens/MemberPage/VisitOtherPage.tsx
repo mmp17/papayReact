@@ -50,6 +50,7 @@ import { Definer } from "../../../lib/Definer";
 import CommunityApiServer from "../../apiServer/communityApiServer";
 import MemberApiServer from "../../apiServer/memberApiServer";
 import FollowApiServer from "../../apiServer/followApiServer";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Types
 import { Member } from "../../../types/user";
 import { BoArticle, SearchMemberArticlesObj } from "../../../types/boArticle";
@@ -86,7 +87,7 @@ const chosenSingleBoArticleRetriever = createSelector(
 export function VisitOtherPage(props: any) {
   // Initializations
   const history = useHistory(),
-    { chosen_mb_id, chosen_art_id, verifiedMemberData } = props,
+    { chosen_mb_id, chosen_art_id } = props,
     { setChosenMember, setChosenMemberBoArticles, setChosenSingleBoArticle } =
       actionDispatch(useDispatch()),
     { chosenMember } = useSelector(chosenMemberRetriever),

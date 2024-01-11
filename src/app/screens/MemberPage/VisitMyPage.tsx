@@ -52,6 +52,7 @@ import {
 import CommunityApiServer from "../../apiServer/communityApiServer";
 import MemberApiServer from "../../apiServer/memberApiServer";
 import { serverApi } from "../../../lib/config";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Types
 import { Member } from "../../../types/user";
 import { BoArticle, SearchMemberArticlesObj } from "../../../types/boArticle";
@@ -88,7 +89,6 @@ const chosenSingleBoArticleRetriever = createSelector(
 export function VisitMyPage(props: any) {
   // Initializations
   const [value, setValue] = useState<string>("1"),
-    { verifiedMemberData } = props,
     { setChosenMember, setChosenMemberBoArticles, setChosenSingleBoArticle } =
       actionDispatch(useDispatch()),
     { chosenMember } = useSelector(chosenMemberRetriever),
@@ -106,7 +106,7 @@ export function VisitMyPage(props: any) {
     [valuePage, setValuePage] = useState<number>(1);
   // Hooks
   useEffect(() => {
-    if (!localStorage.getItem("member_data")) {
+    if (!verifiedMemberData) {
       sweetFailureProvider("Please! Login first", true, true);
     }
     const communityService = new CommunityApiServer();
@@ -136,7 +136,7 @@ export function VisitMyPage(props: any) {
   // chosenSingleBoArticleHandler
   const chosenSingleBoArticleHandler = async (id: string) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
       const communityService = new CommunityApiServer();
       await communityService
         .chosenSingleBoArticle(id)

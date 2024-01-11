@@ -39,6 +39,7 @@ import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
+import { verifiedMemberData } from "../../apiServer/verify";
 // Type Imports
 import { Product } from "../../../types/product";
 import { Restaurant } from "../../../types/user";
@@ -97,7 +98,7 @@ export function ChosenDish(props: any) {
   //  Handlers
   const targetLikeProduct = async (e: any) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const memberService = new MemberApiServer(),
         like_result: any = await memberService.memberLikeTarget({
