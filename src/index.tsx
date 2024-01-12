@@ -1,7 +1,7 @@
 // React Core and DOM Imports
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 // Redux Imports
 import { Provider } from "react-redux"; //to make the Redux store available to the rest of the app.
 import { store } from "./app/store";
@@ -14,12 +14,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
 
-const container = document.getElementById("root")!; //  is used to select the HTML element with the ID of root where your React app will mount.
-// where your React app will mount. The ! at the end is a TypeScript non-null assertion operator, indicating that you're sure this element exists.
-const root = createRoot(container); // creates a root for React app with the container you've selected.
-
-root.render(
-  // is the method that initializes the rendering of App component into the root DOM node.
+ReactDOM.render(
+  // is the method from the ReactDOM library, and it is used to render your React application into the HTML document.
   <React.StrictMode>
     <Provider store={store}>
       <Router>
@@ -29,7 +25,9 @@ root.render(
         </ThemeProvider>
       </Router>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
+  // This is the DOM element where your React application will be mounted
 );
 
 // Provider wraps your App component, passing the store as a prop, making
