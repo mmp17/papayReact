@@ -118,7 +118,7 @@ export function BestRestaurants() {
                         aria-label="Like minimal photography"
                         size="md"
                         variant="solid"
-                        color="danger"
+                        color="neutral"
                         sx={{
                           position: "absolute",
                           zIndex: 2,

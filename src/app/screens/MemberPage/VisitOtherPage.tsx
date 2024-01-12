@@ -54,6 +54,7 @@ import { verifiedMemberData } from "../../apiServer/verify";
 // Types
 import { Member } from "../../../types/user";
 import { BoArticle, SearchMemberArticlesObj } from "../../../types/boArticle";
+import { serverApi } from "../../../lib/config";
 
 // Redux Slice
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -251,24 +252,7 @@ export function VisitOtherPage(props: any) {
                       direction="row"
                       alignItems={"center"}
                       justifyContent="center"
-                    >
-                      {/* <Box className={"bottom_box"}>
-                        <Pagination
-                          count={5}
-                          page={1}
-                          renderItem={(item) => (
-                            <PaginationItem
-                              components={{
-                                previous: ArrowBackIcon,
-                                next: ArrowForwardIcon,
-                              }}
-                              {...item}
-                              color={"secondary"}
-                            />
-                          )}
-                        />
-                      </Box> */}
-                    </Stack>
+                    ></Stack>
                   </Box>
                 </TabPanel>
 
@@ -328,8 +312,11 @@ export function VisitOtherPage(props: any) {
                 >
                   <div className={"order_user_img"}>
                     <img
-                      className={"order_user_avatar"}
-                      src={"/icons/profile.svg"}
+                      className={"other_user_avatar"}
+                      src={`${serverApi}/${
+                        chosenMember?.mb_image ?? "/icons/profile.svg"
+                      }`}
+                      alt="User Avatar"
                     />
                     <div className={"order_user_icon_box"}>
                       <img src="/icons/user_icon.svg" />

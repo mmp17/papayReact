@@ -114,7 +114,7 @@ export function OrdersPage(props: any) {
             >
               <div className={"order_user_img"}>
                 <img
-                  className={"order_user_avatar"}
+                  className={"other_user_avatar"}
                   src={
                     verifiedMemberData?.mb_image
                       ? verifiedMemberData.mb_image

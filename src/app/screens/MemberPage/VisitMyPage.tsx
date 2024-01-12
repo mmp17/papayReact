@@ -275,7 +275,7 @@ export function VisitMyPage(props: any) {
                 >
                   <div className={"order_user_img"}>
                     <img
-                      className={"order_user_avatar"}
+                      className={"other_user_avatar"}
                       src={
                         chosenMember?.mb_image
                           ? `${serverApi}/${chosenMember.mb_image}`
