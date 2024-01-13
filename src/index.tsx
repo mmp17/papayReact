@@ -13,6 +13,7 @@ import reportWebVitals from "./reportWebVitals"; // is a function that can be us
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
+import { SocketContext, socket } from "./app/context/socket";
 
 ReactDOM.render(
   // is the method from the ReactDOM library, and it is used to render your React application into the HTML document.
@@ -21,7 +22,9 @@ ReactDOM.render(
       <Router>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <App />
+          <SocketContext.Provider value={socket}>
+            <App />
+          </SocketContext.Provider>
         </ThemeProvider>
       </Router>
     </Provider>
