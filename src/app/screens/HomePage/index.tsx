@@ -17,10 +17,7 @@ import "../../../css/home.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import {
-  setTopRestaurants,
-  setBestRestaurants,
-} from "../../screens/HomePage/slice";
+import { setTopRestaurants, setBestRestaurants } from "./slice";
 import { retrieveTopRestaurants } from "../../screens/HomePage/selector";
 import { Restaurant } from "../../../types/user";
 import RestaurantApiServer from "../../apiServer/restaurantApiServer";

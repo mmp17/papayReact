@@ -7,6 +7,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Box, Stack } from "@mui/material";
 
 export const TViewer = (props: any) => {
+  console.log("TViewer", props);
   const editorRef = useRef();
 
   return (
