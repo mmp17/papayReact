@@ -7,7 +7,6 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Box, Stack } from "@mui/material";
 
 export const TViewer = (props: any) => {
-  console.log("TViewer", props);
   const editorRef = useRef();
 
   return (
@@ -16,7 +15,7 @@ export const TViewer = (props: any) => {
         <Viewer
           //@ts-ignore
           ref={editorRef}
-          initialValue={props.chosenSingleBoArticle?.art_content}
+          initialValue={props.chosenSingleBoArticles?.art_content}
           height="600px"
         />
       </Box>
